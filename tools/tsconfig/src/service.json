@@ -13,11 +13,6 @@
     "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true,
-    "plugins": [
-      {
-        "name": "@effect/language-service"
-      }
-    ]
+    "sourceMap": true
   }
 }

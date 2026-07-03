@@ -1,30 +1,115 @@
 ---
 name: commit-and-push
 description: >-
-  Stage every change in the working tree, write a Conventional Commits message
-  that accurately describes the diff, commit, and push to the current branch.
-  Use this whenever the user asks to "commit", "commit and push", "commit my
-  changes", "push this up", "save my work to git", "ship it", or otherwise wants
-  their working changes committed — even if they don't say the words "conventional
-  commit". Trigger it when someone wants a clean, well-formatted commit written
-  for them rather than typing the git commands themselves.
+  Stage every change in the working tree, write a scoped Conventional Commit
+  message that follows repository commit and PR title conventions, commit, and
+  push to the current branch. Use this whenever the user asks to "commit",
+  "commit and push", "commit my changes", "push this up", "save my work to
+  git", "ship it", or otherwise wants their working changes committed - even if
+  they do not say the words "conventional commit".
 ---
 
 # Commit and Push
 
-Turn the current working-tree changes into one well-formed Conventional Commits
-commit and push it to the current branch. The goal is a commit message a
+Turn the current working-tree changes into one well-formed scoped Conventional
+Commit and push it to the current branch. The goal is a commit message a
 teammate can read in isolation and understand _what changed and why_, without
 opening the diff.
 
+## Commit and PR Conventions
+
+### 1. Purpose
+
+This specification defines repository-wide naming conventions for:
+
+- commit messages
+- pull request (PR) titles.
+
+The goal is consistent history, clear release notes, and searchable intent
+across the monorepo.
+
+#### 1.0 Normative Keywords (RFC 2119 style)
+
+- Uppercase `MUST` = required
+- Uppercase `MUST NOT` = prohibited
+- Uppercase `SHOULD` = strongly recommended
+- Uppercase `MAY` = optional
+- Lowercase forms (`must`, `must not`, `should`, `may`) are explanatory and are
+  not normative keywords.
+
+### 2. Required Format
+
+Commit subjects and PR titles MUST follow this format:
+
+`<type>(<scope>): <description>`
+
+### 3. Allowed Types
+
+The `<type>` value MUST be one of:
+
+- `feat`: new feature or functionality
+- `fix`: bug fix
+- `docs`: documentation or README changes
+- `chore`: maintenance tasks, dependency updates, and repository upkeep
+- `refactor`: code refactoring without behavior changes
+- `test`: adding or updating tests
+
+Types MUST be lowercase.
+
+### 4. Scope Rules
+
+- Scope is REQUIRED for all commit subjects and PR titles.
+- Scope MUST be lowercase.
+- Scope MUST be the package name without the npm scope prefix.
+- If the package name is `@org/app-console`, the scope MUST be `app-console`.
+- If the package name is `@org/lib-browser-feature-flags`, the scope MUST be
+  `lib-browser-feature-flags`.
+- Scope MUST match the package that is primarily affected by the change.
+- For changes spanning multiple packages, scope SHOULD use the primary package
+  for the change.
+- For root-only changes, scope MUST use the root package name from the root
+  `package.json`.
+
+### 5. Commit Message Rules
+
+- The first line (subject) MUST follow Section 2.
+- Additional body/footer lines MAY be included after the subject.
+- The subject SHOULD describe intent/result, not implementation details.
+
+### 6. Pull Request Title Rules
+
+- PR titles MUST follow the same format and type rules as commit subjects.
+- PR titles SHOULD reflect the primary change introduced by the PR.
+
+### 7. Compliant Examples
+
+- `docs(app-console): update contributing guidelines`
+- `fix(app-console): resolve crash on startup`
+- `feat(app-console): add dark mode support`
+- `chore(lib-browser-feature-flags): bump dependency versions`
+- `refactor(lib-shared-date): simplify date parsing utility`
+- `test(service-api): add contract validation tests`
+
+### 8. Non-compliant Examples
+
+- `Add dark mode`
+- `fixed bug`
+- `feat: add dark mode`
+- `feat(@org/app-console): add dark mode`
+- `fix(apps/app-console): resolve crash on startup`
+- `docs(specs): update docs`
+- `Feature: dark mode`
+- `feat add dark mode`
+- `misc: update stuff`
+
 ## Workflow
 
-Do these in order. Steps 1–2 are read-only investigation; don't skip them — the
-quality of the message depends entirely on understanding the diff first.
+Do these in order. Steps 1-2 are read-only investigation; do not skip them. The
+quality of the message depends on understanding the diff first.
 
 ### 1. Read the current state
 
-Run these together to understand what you're about to commit:
+Run these together to understand what you are about to commit:
 
 ```bash
 git status
@@ -32,25 +117,26 @@ git diff --stat
 git diff                     # unstaged changes
 git diff --staged            # already-staged changes
 git branch --show-current
-git log -n 5 --oneline       # match the repo's existing message style
+git log -n 5 --oneline       # understand existing history
 ```
 
-Look at `git log` output specifically to learn the repo's conventions — the
-types and scopes it already uses, whether subjects are capitalized, whether
-bodies are common. Matching the surrounding history matters more than any rule
-below.
+Also read the root `package.json` and any affected workspace `package.json`
+files so the commit scope can be derived from package names. Scope is not a
+directory name, npm scope, or arbitrary area label.
+
+Look at `git log` output to understand repository history, but do not copy older
+non-compliant subjects. The convention in this file is authoritative.
 
 ### 2. Understand the change as a whole
 
-Read the actual diff, not just the file names. Ask: what is the _one thing_ this
-change accomplishes? The commit message describes intent and effect, not a
-file-by-file inventory. "Renamed variable, added import, updated call site" is
-three files but one change: "refactor: rename `x` to `y`".
+Read the actual diff, not just the file names. Ask what one thing this change
+accomplishes. The commit message describes intent and effect, not a file-by-file
+inventory.
 
-If the working tree contains clearly unrelated changes (e.g. a bug fix _and_ an
-unrelated dependency bump), note this to the user and ask whether they want
-separate commits — but default to a single commit, since the request is to
-commit everything.
+If the working tree contains clearly unrelated changes, such as a bug fix and an
+unrelated dependency bump, note this to the user and ask whether they want
+separate commits. Default to a single commit only when the user explicitly asks
+to commit everything.
 
 ### 3. Stage everything
 
@@ -59,48 +145,38 @@ git add -A
 ```
 
 This stages new, modified, and deleted files. If `git status` showed files you
-suspect shouldn't be committed (secrets, large binaries, `.env`, editor cruft,
-debug logging), pause and flag them to the user before staging rather than
-committing them silently.
+suspect should not be committed, such as secrets, large binaries, `.env`, editor
+cruft, or debug logging, pause and flag them to the user before staging rather
+than committing them silently.
 
-### 4. Write the Conventional Commits message
+### 4. Write the Conventional Commit message
 
 Format:
 
-```
-<type>(<scope>): <subject>
+```text
+<type>(<scope>): <description>
 
 <body>
 
 <footer>
 ```
 
-- **type** (required): one of
-  `feat` · `fix` · `docs` · `style` · `refactor` · `perf` · `test` · `build` ·
-  `ci` · `chore` · `revert`. Pick by the change's _intent_:
-  - `feat` — a new capability the user can now use
-  - `fix` — corrects broken behavior
-  - `refactor` — restructures code without changing behavior
-  - `chore` — tooling, config, deps, housekeeping with no product impact
-  - `docs`/`test`/`build`/`ci` — changes confined to those areas
-- **scope** (optional but encouraged): the area of the codebase touched, in
-  parentheses — a package, module, or directory (`auth`, `api`, `deps`,
-  `infra`). Prefer scopes already used in `git log`. Omit it rather than invent
-  a vague one.
-- **subject** (required): imperative mood, lowercase start, no trailing period,
-  ≤ 50 chars if you can. "add", not "added" or "adds". Describe the effect, not
-  the mechanics.
-- **body** (optional): when you include one, write it as `-` bullet points —
-  one bullet per distinct change or reason, phrased as what the change does and
-  why. Bullets scan far faster than a paragraph when a teammate is skimming
-  `git log`, so prefer them over prose. Wrap each bullet at ~72 chars. Include a
-  body whenever there's more than one notable change or the _why_ isn't obvious
-  from the subject; skip it for small, self-explanatory changes, since a forced
-  body is worse than none.
-- **footer** (optional): issue references (`Closes #142`) or
-  `BREAKING CHANGE: <description>` when the change is backward-incompatible. A
-  breaking change may also be flagged with `!` after the type/scope, e.g.
-  `feat(api)!: ...`.
+- **type** (required): MUST be lowercase and one of `feat`, `fix`, `docs`,
+  `chore`, `refactor`, or `test`. Pick by the change's intent.
+- **scope** (required): MUST be lowercase and MUST be the primarily affected
+  package name without the npm scope prefix. For root-only changes, use the
+  root package name from the root `package.json`.
+- **description** (required): SHOULD describe intent/result, not implementation
+  details. Use imperative mood, a lowercase start, and no trailing period.
+- **body** (optional): MAY be included after a blank line. When included, write
+  it as `-` bullet points, one bullet per distinct change or reason. Phrase each
+  bullet as what the change does and why. Wrap each bullet at about 72 chars.
+- **footer** (optional): MAY include issue references, such as `Closes #142`, or
+  `BREAKING CHANGE: <description>` when the change is backward-incompatible.
+
+Do not use non-compliant subjects like `feat: add login`,
+`feat(@org/app-console): add login`, `fix(apps/app-console): resolve crash`, or
+`misc: update stuff`.
 
 Write the message to a temp file and commit with it so multi-line bodies and
 special characters are preserved exactly:
@@ -111,38 +187,44 @@ git commit -F /path/to/scratchpad/commit-msg.txt
 
 Do **not** add a `Co-Authored-By` trailer.
 
-**Examples:**
+Examples:
 
-Input: added a new WorkOS SSO login route and its callback handler
+Input: added a new WorkOS SSO login route and its callback handler in
+`@org/app-console`
+
 Output:
 
-```
-feat(auth): add WorkOS SSO login and callback routes
+```text
+feat(app-console): add WorkOS SSO login routes
 
 - add login route that redirects into the AuthKit flow
 - add callback route that exchanges the code for a session
 ```
 
-Input: fixed a crash when the events list is empty, plus a typo in a nearby comment
+Input: fixed a crash when the events list is empty in `@org/app-console`, plus
+a typo in a nearby comment
+
 Output:
 
-```
-fix(events): guard against empty event list
+```text
+fix(app-console): guard against empty event list
 
 - return the empty state instead of dereferencing events[0],
   which threw on an empty timeline
 - fix a typo in the nearby add() doc comment
 ```
 
-Input: bumped effect to the latest beta and updated the lockfile
+Input: bumped a dependency in `@org/lib-browser-feature-flags` and updated the
+lockfile
+
 Output:
 
-```
-chore(deps): upgrade effect to v4 beta
+```text
+chore(lib-browser-feature-flags): upgrade effect to v4 beta
 ```
 
-(The dependency bump is a single self-explanatory change, so it needs no body —
-don't invent bullets to pad a one-line commit.)
+The dependency bump is a single self-explanatory change, so it needs no body. Do
+not invent bullets to pad a one-line commit.
 
 ### 5. Push to the current branch
 
@@ -150,7 +232,7 @@ don't invent bullets to pad a one-line commit.)
 git push
 ```
 
-If the branch has no upstream yet, git will error asking you to set one — push
+If the branch has no upstream yet, git will error asking you to set one. Push
 with the tracking flag:
 
 ```bash
@@ -158,17 +240,16 @@ git push -u origin "$(git branch --show-current)"
 ```
 
 Push to whatever branch is currently checked out, as-is. Do not create a new
-branch and do not second-guess the target branch — the user has asked to commit
-to the current branch.
+branch and do not second-guess the target branch.
 
 ## After committing
 
 Report back concisely: the commit hash and subject line, and confirmation that
-the push succeeded (and to which branch). If the push failed (rejected,
-diverged, network), surface the exact git error and stop — don't force-push or
-try to reconcile without asking.
+the push succeeded and to which branch. If the push failed because it was
+rejected, diverged, or hit a network error, surface the exact git error and
+stop. Do not force-push or try to reconcile without asking.
 
-## When there's nothing to commit
+## When there is nothing to commit
 
-If `git status` shows a clean tree, say so and stop. Don't create an empty
+If `git status` shows a clean tree, say so and stop. Do not create an empty
 commit.
