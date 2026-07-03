@@ -43,13 +43,6 @@ nix develop
 opencode
 ```
 
-If using `direnv`, configure the repository to load the flake automatically:
-
-```bash
-echo "use flake" > .envrc
-direnv allow
-```
-
 Agents should run verification commands from inside the Nix shell. If an agent
 was not started from `nix develop`, run commands through `nix develop --command`
 instead.
