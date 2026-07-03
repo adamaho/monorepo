@@ -12,9 +12,6 @@ catalogs:
     eslint-plugin-jsdoc:
       specifier: 63.0.2
       version: 63.0.2
-    fallow:
-      specifier: 2.95.0
-      version: 2.95.0
     oxfmt:
       specifier: 0.54.0
       version: 0.54.0
@@ -35,9 +32,6 @@ importers:
 
   .:
     devDependencies:
-      fallow:
-        specifier: 'catalog:'
-        version: 2.95.0
       oxfmt:
         specifier: 'catalog:'
         version: 0.54.0
@@ -117,46 +111,6 @@ packages:
   '@eslint/plugin-kit@0.6.1':
     resolution: {integrity: sha512-iH1B076HoAshH1mLpHMgwdGeTs0CYwL0SPMkGuSebZrwBp16v415e9NZXg2jtrqPVQjf6IANe2Vtlr5KswtcZQ==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
-
-  '@fallow-cli/darwin-arm64@2.95.0':
-    resolution: {integrity: sha512-j0u38kohZNXMn9SiBlrANTHZflAOmr5/cH6OVcJxD2ZVjb7rZGSSSDYIIcKOUfphNk62JADCPdfJfHcR1PvAGA==}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@fallow-cli/darwin-x64@2.95.0':
-    resolution: {integrity: sha512-mXevHgSMBfzva3BQ0fD2X0d8BM+sVJPp7DDjBUtMsOTPMG5uGRrJZWboWJxkzoIaPXWGdbnpzHHz7k3KTN0Kfw==}
-    cpu: [x64]
-    os: [darwin]
-
-  '@fallow-cli/linux-arm64-gnu@2.95.0':
-    resolution: {integrity: sha512-zj92iptkkAxU1MOPQKdRGNII4A5/od4Efnr/hnOoqJu+wOJFRpoNmc6pzSj99OuMJBjI2NS2sShXozVO4vEMyw==}
-    cpu: [arm64]
-    os: [linux]
-
-  '@fallow-cli/linux-arm64-musl@2.95.0':
-    resolution: {integrity: sha512-y1vniS59wtvgheWgLs5xxOSikdsrR3oIRi3NGSUZ8tam9Ci48QmBzKnW+k/RACFuQhd8Z1DMWd6MDk0+h7BgGQ==}
-    cpu: [arm64]
-    os: [linux]
-
-  '@fallow-cli/linux-x64-gnu@2.95.0':
-    resolution: {integrity: sha512-bYF0P7Xu/OnxHQrjRAgvjlT0hXp2OHc68CnNRRmIXSSfz03ttWJCBb4iOexEQgtgmK2r3JQ3qQhFKxrWuYbPSA==}
-    cpu: [x64]
-    os: [linux]
-
-  '@fallow-cli/linux-x64-musl@2.95.0':
-    resolution: {integrity: sha512-ylq2nCqkTKjMGMoUoieJR9sGlMr6TJcUzMMN47D7AWrCp+dzvX+FtbRSJqtaBmC2qSJJpCz92BfkmGx2gXTZFQ==}
-    cpu: [x64]
-    os: [linux]
-
-  '@fallow-cli/win32-arm64-msvc@2.95.0':
-    resolution: {integrity: sha512-IIRFW7u16rb0lbMjXZMidMuPaab8vsVMfK1uxA6I81Pnja1WsI4Owqb2eehrVqrKGx7xLEGSVaTwb/jYCW1nwA==}
-    cpu: [arm64]
-    os: [win32]
-
-  '@fallow-cli/win32-x64-msvc@2.95.0':
-    resolution: {integrity: sha512-+HFHB89i98363HMIDgbc44qlUPSM6wyYmw6z6Cm+HWfEo/GIAQFUuxkq3lPvdu8gvT6IbLwcyjPBNX/yVGX3Wg==}
-    cpu: [x64]
-    os: [win32]
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -514,10 +468,6 @@ packages:
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
 
-  detect-libc@2.1.2:
-    resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
-    engines: {node: '>=8'}
-
   escape-string-regexp@4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
@@ -569,11 +519,6 @@ packages:
   esutils@2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
-
-  fallow@2.95.0:
-    resolution: {integrity: sha512-gY9Oyw5ZgvF3ZZwqhj34zAJBE/9OlwTXVaEI4G9kWCz1+npOSgw5nNCm7UyeTbWd25hDt6zoli1tMX40ADky0Q==}
-    engines: {node: '>=16'}
-    hasBin: true
 
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
@@ -857,30 +802,6 @@ snapshots:
       '@eslint/core': 1.2.1
       levn: 0.4.1
 
-  '@fallow-cli/darwin-arm64@2.95.0':
-    optional: true
-
-  '@fallow-cli/darwin-x64@2.95.0':
-    optional: true
-
-  '@fallow-cli/linux-arm64-gnu@2.95.0':
-    optional: true
-
-  '@fallow-cli/linux-arm64-musl@2.95.0':
-    optional: true
-
-  '@fallow-cli/linux-x64-gnu@2.95.0':
-    optional: true
-
-  '@fallow-cli/linux-x64-musl@2.95.0':
-    optional: true
-
-  '@fallow-cli/win32-arm64-msvc@2.95.0':
-    optional: true
-
-  '@fallow-cli/win32-x64-msvc@2.95.0':
-    optional: true
-
   '@humanfs/core@0.19.2':
     dependencies:
       '@humanfs/types': 0.15.0
@@ -1074,8 +995,6 @@ snapshots:
 
   deep-is@0.1.4: {}
 
-  detect-libc@2.1.2: {}
-
   escape-string-regexp@4.0.0: {}
 
   eslint-plugin-jsdoc@63.0.2(eslint@10.0.1(jiti@2.7.0)):
@@ -1163,19 +1082,6 @@ snapshots:
   estraverse@5.3.0: {}
 
   esutils@2.0.3: {}
-
-  fallow@2.95.0:
-    dependencies:
-      detect-libc: 2.1.2
-    optionalDependencies:
-      '@fallow-cli/darwin-arm64': 2.95.0
-      '@fallow-cli/darwin-x64': 2.95.0
-      '@fallow-cli/linux-arm64-gnu': 2.95.0
-      '@fallow-cli/linux-arm64-musl': 2.95.0
-      '@fallow-cli/linux-x64-gnu': 2.95.0
-      '@fallow-cli/linux-x64-musl': 2.95.0
-      '@fallow-cli/win32-arm64-msvc': 2.95.0
-      '@fallow-cli/win32-x64-msvc': 2.95.0
 
   fast-deep-equal@3.1.3: {}
 

@@ -1,5 +1,5 @@
 {
-  "name": "goho",
+  "name": "monorepo",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,7 +11,6 @@
     "tsc": "turbo run tsc"
   },
   "devDependencies": {
-    "fallow": "catalog:",
     "oxfmt": "catalog:",
     "rimraf": "catalog:",
     "turbo": "catalog:"

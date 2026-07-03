@@ -1,11 +1,11 @@
-# @goho/tool-tsconfig
+# @monorepo/tool-tsconfig
 
 Shared TypeScript configurations for this Turborepo.
 
 ## Exports
 
-- `@goho/tool-tsconfig/base`: strict baseline compiler defaults.
-- `@goho/tool-tsconfig/service`: NodeNext service defaults for backend workspaces.
+- `@monorepo/tool-tsconfig/base`: strict baseline compiler defaults.
+- `@monorepo/tool-tsconfig/service`: NodeNext service defaults for backend workspaces.
 
 ## Usage in a workspace package
 
@@ -14,7 +14,7 @@ Shared TypeScript configurations for this Turborepo.
 ```json
 {
   "devDependencies": {
-    "@goho/tool-tsconfig": "workspace:*"
+    "@monorepo/tool-tsconfig": "workspace:*"
   }
 }
 ```
@@ -23,7 +23,7 @@ Shared TypeScript configurations for this Turborepo.
 
 ```json
 {
-  "extends": "@goho/tool-tsconfig/service",
+  "extends": "@monorepo/tool-tsconfig/service",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src"

@@ -15,7 +15,6 @@ allowBuilds:
 catalog:
   "@effect/language-service": 0.86.2
   eslint-plugin-jsdoc: 63.0.2
-  fallow: 2.95.0
   oxfmt: 0.54.0
   oxlint: 1.69.0
   rimraf: 6.1.3

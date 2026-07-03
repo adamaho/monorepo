@@ -45,7 +45,7 @@
     },
     "db:create": {
       "cache": false,
-      "dependsOn": ["@goho/infra-local#infra:up"],
+      "dependsOn": ["@monorepo/infra-local#infra:up"],
       "outputs": []
     },
     "db:push": {

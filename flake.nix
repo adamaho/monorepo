@@ -1,5 +1,5 @@
 {
-  description = "Development shell for the goho monorepo";
+  description = "Development shell for the monorepo monorepo";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -32,7 +32,7 @@
             ];
 
             shellHook = ''
-              echo "goho dev shell: node $(node --version), pnpm $(pnpm --version 2>/dev/null || printf 'unavailable')"
+              echo "monorepo dev shell: node $(node --version), pnpm $(pnpm --version 2>/dev/null || printf 'unavailable')"
               echo "Docker daemon must be installed/enabled by the host OS for docker compose commands to run."
             '';
           };

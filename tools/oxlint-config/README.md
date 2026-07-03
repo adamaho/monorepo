@@ -1,4 +1,4 @@
-# @goho/tool-oxlint-config
+# @monorepo/tool-oxlint-config
 
 Shared Oxlint configuration for this Turborepo.
 
@@ -9,7 +9,7 @@ Shared Oxlint configuration for this Turborepo.
 ```json
 {
   "devDependencies": {
-    "@goho/tool-oxlint-config": "workspace:*"
+    "@monorepo/tool-oxlint-config": "workspace:*"
   }
 }
 ```
