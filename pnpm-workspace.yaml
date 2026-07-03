@@ -10,11 +10,13 @@ packages:
 allowBuilds:
   esbuild: true
   fallow: true
+  lefthook: true
   msgpackr-extract: true
 
 catalog:
   "@effect/language-service": 0.86.3
   eslint-plugin-jsdoc: 63.0.10
+  lefthook: 2.1.9
   oxfmt: 0.57.0
   oxlint: 1.72.0
   rimraf: 6.1.3
