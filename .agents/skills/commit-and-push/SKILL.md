@@ -5,7 +5,7 @@ description: >-
   message that follows repository commit and PR title conventions, commit, and
   push to the current branch. Use this whenever the user asks to "commit",
   "commit and push", "commit my changes", "push this up", "save my work to
-  git", "ship it", or otherwise wants their working changes committed - even if
+  git", "ship it", or otherwise wants their working changes committed, even if
   they do not say the words "conventional commit".
 ---
 
@@ -23,7 +23,7 @@ opening the diff.
 This specification defines repository-wide naming conventions for:
 
 - commit messages
-- pull request (PR) titles.
+- pull request (PR) titles
 
 The goal is consistent history, clear release notes, and searchable intent
 across the monorepo.
@@ -58,7 +58,7 @@ Types MUST be lowercase.
 
 ### 4. Scope Rules
 
-- Scope is REQUIRED for all commit subjects and PR titles.
+- Scope MUST be included in all commit subjects and PR titles.
 - Scope MUST be lowercase.
 - Scope MUST be the package name without the npm scope prefix.
 - If the package name is `@org/app-console`, the scope MUST be `app-console`.
@@ -73,7 +73,8 @@ Types MUST be lowercase.
 ### 5. Commit Message Rules
 
 - The first line (subject) MUST follow Section 2.
-- Additional body/footer lines MAY be included after the subject.
+- Additional body/footer lines MAY be included after a blank line following the
+  subject.
 - The subject SHOULD describe intent/result, not implementation details.
 
 ### 6. Pull Request Title Rules
@@ -161,18 +162,20 @@ Format:
 <footer>
 ```
 
-- **type** (required): MUST be lowercase and one of `feat`, `fix`, `docs`,
-  `chore`, `refactor`, or `test`. Pick by the change's intent.
-- **scope** (required): MUST be lowercase and MUST be the primarily affected
-  package name without the npm scope prefix. For root-only changes, use the
-  root package name from the root `package.json`.
-- **description** (required): SHOULD describe intent/result, not implementation
-  details. Use imperative mood, a lowercase start, and no trailing period.
-- **body** (optional): MAY be included after a blank line. When included, write
-  it as `-` bullet points, one bullet per distinct change or reason. Phrase each
+- **type**: MUST be present, MUST be lowercase, and MUST be one of `feat`,
+  `fix`, `docs`, `chore`, `refactor`, or `test`. Pick by the change's intent.
+- **scope**: MUST be present, MUST be lowercase, and MUST be the primarily
+  affected package name without the npm scope prefix. For root-only changes, use
+  the root package name from the root `package.json`.
+- **description**: MUST be present and SHOULD describe intent/result, not
+  implementation details. Use imperative mood, a lowercase start, and no
+  trailing period.
+- **body**: MAY be included after a blank line. When included, the body MUST use
+  `-` bullet points, one bullet per distinct change or reason. Phrase each
   bullet as what the change does and why. Wrap each bullet at about 72 chars.
-- **footer** (optional): MAY include issue references, such as `Closes #142`, or
-  `BREAKING CHANGE: <description>` when the change is backward-incompatible.
+- **footer**: MAY include issue references, such as `Closes #142`. If the change
+  is backward-incompatible, the footer MUST include
+  `BREAKING CHANGE: <description>`.
 
 Do not use non-compliant subjects like `feat: add login`,
 `feat(@org/app-console): add login`, `fix(apps/app-console): resolve crash`, or

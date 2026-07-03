@@ -42,8 +42,8 @@ jobs:
       - name: Lint
         run: pnpm turbo run lint
 
-  format:
-    name: format
+  fmt:
+    name: fmt
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -61,7 +61,7 @@ jobs:
         uses: ./.github/actions/setup-pnpm
 
       - name: Format check
-        run: pnpm run format:check
+        run: pnpm run fmt:check
 
   tsc:
     name: tsc

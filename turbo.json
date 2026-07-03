@@ -16,10 +16,10 @@
       "dependsOn": ["transit", "^lint"],
       "outputs": []
     },
-    "format": {
+    "fmt": {
       "outputs": []
     },
-    "format:check": {
+    "fmt:check": {
       "outputs": []
     },
     "clean": {

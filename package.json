@@ -6,11 +6,12 @@
     "clean": "turbo run clean && rimraf node_modules",
     "dev": "turbo run dev --ui=tui",
     "lint": "turbo run lint",
-    "format": "oxfmt --config ./.oxfmtrc.json . '!repos/**'",
-    "format:check": "oxfmt --check --config ./.oxfmtrc.json .",
+    "fmt": "oxfmt --config ./tools/oxfmt-config/src/base.json . '!repos/**'",
+    "fmt:check": "oxfmt --check --config ./tools/oxfmt-config/src/base.json .",
     "tsc": "turbo run tsc"
   },
   "devDependencies": {
+    "@monorepo/tool-oxfmt-config": "workspace:*",
     "oxfmt": "catalog:",
     "rimraf": "catalog:",
     "turbo": "catalog:"
