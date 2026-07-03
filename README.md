@@ -3,6 +3,9 @@
 `monorepo` is a template repository for starting future projects with a shared
 development environment and project structure.
 
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the development workflow,
+verification commands, workspace conventions, and commit guidelines.
+
 ## Prerequisites
 
 Before developing in this repository, install:

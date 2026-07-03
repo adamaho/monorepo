@@ -139,7 +139,29 @@ unrelated dependency bump, note this to the user and ask whether they want
 separate commits. Default to a single commit only when the user explicitly asks
 to commit everything.
 
-### 3. Stage everything
+### 3. Format the working tree
+
+Run the repository formatter before staging so commits do not rely on Git hooks
+to clean up formatting:
+
+```bash
+pnpm fmt
+```
+
+Formatting may modify files. After it finishes, re-check the working tree before
+staging:
+
+```bash
+git status
+git diff --stat
+git diff
+```
+
+If formatting introduced changes that are unrelated to the requested commit or
+revealed files that should not be committed, pause and flag them to the user
+before staging.
+
+### 4. Stage everything
 
 ```bash
 git add -A
@@ -150,7 +172,7 @@ suspect should not be committed, such as secrets, large binaries, `.env`, editor
 cruft, or debug logging, pause and flag them to the user before staging rather
 than committing them silently.
 
-### 4. Write the Conventional Commit message
+### 5. Write the Conventional Commit message
 
 Format:
 
@@ -229,7 +251,7 @@ chore(lib-browser-feature-flags): upgrade effect to v4 beta
 The dependency bump is a single self-explanatory change, so it needs no body. Do
 not invent bullets to pad a one-line commit.
 
-### 5. Push to the current branch
+### 6. Push to the current branch
 
 ```bash
 git push
