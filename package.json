@@ -1,0 +1,24 @@
+{
+  "name": "goho",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "clean": "turbo run clean && rimraf node_modules",
+    "dev": "turbo run dev --ui=tui",
+    "lint": "turbo run lint",
+    "format": "oxfmt --config ./.oxfmtrc.json . '!repos/**'",
+    "format:check": "oxfmt --check --config ./.oxfmtrc.json .",
+    "tsc": "turbo run tsc"
+  },
+  "devDependencies": {
+    "fallow": "catalog:",
+    "oxfmt": "catalog:",
+    "rimraf": "catalog:",
+    "turbo": "catalog:"
+  },
+  "engines": {
+    "node": "24.16.0",
+    "pnpm": "11.6.0"
+  },
+  "packageManager": "pnpm@11.6.0"
+}
