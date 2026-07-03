@@ -30,11 +30,6 @@
               nodejs_24
               pnpm_11
             ];
-
-            shellHook = ''
-              echo "monorepo dev shell: node $(node --version), pnpm $(pnpm --version 2>/dev/null || printf 'unavailable')"
-              echo "Docker daemon must be installed/enabled by the host OS for docker compose commands to run."
-            '';
           };
         });
     };
