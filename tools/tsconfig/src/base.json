@@ -9,6 +9,9 @@
     "noUnusedLocals": true,
     "noImplicitOverride": true,
     "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
     "skipLibCheck": true,
     "plugins": [
       {

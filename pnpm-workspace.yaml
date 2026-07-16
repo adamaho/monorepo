@@ -13,12 +13,14 @@ allowBuilds:
   msgpackr-extract: true
 
 catalog:
-  "@effect/language-service": 0.86.3
-  eslint-plugin-jsdoc: 63.0.10
-  oxfmt: 0.57.0
-  oxlint: 1.72.0
+  "@effect/tsgo": 0.22.0
+  eslint-plugin-jsdoc: 63.0.13
+  oxfmt: 0.59.0
+  oxlint: 1.74.0
   rimraf: 6.1.3
-  turbo: 2.10.2
-  typescript: 6.0.3
+  turbo: 2.10.5
+  typescript: 7.0.2
 
 catalogMode: strict
+
+minimumReleaseAge: 1440
