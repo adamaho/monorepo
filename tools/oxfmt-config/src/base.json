@@ -5,6 +5,7 @@
   "useTabs": false,
   "semi": true,
   "singleQuote": false,
+  "sortImports": true,
   "trailingComma": "all",
   "endOfLine": "lf",
   "insertFinalNewline": true
