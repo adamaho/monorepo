@@ -55,8 +55,8 @@ Useful focused commands:
 Use the existing top-level workspace directories consistently:
 
 - `shells/*` for deployable application hosts that compose product features
-- `services/*` for deployable backend services and workers
-- `features/*` for vertical product features shared across shells or services
+- `programs/*` for deployable backend programs and workers
+- `features/*` for vertical product features shared across shells or programs
 - `libs/*` for reusable libraries
 - `clients/*` for generated or hand-written external service api clients
 - `tools/*` for internal tooling packages
@@ -69,7 +69,7 @@ feature into `libs/*`.
 
 Package names should use the repository npm scope and a clear package suffix,
 for example `@monorepo/shell-web`, `@monorepo/feature-billing`,
-`@monorepo/service-api`, or `@monorepo/lib-dates`.
+`@monorepo/program-api`, or `@monorepo/lib-dates`.
 
 ## Dependency Management
 
@@ -109,7 +109,7 @@ Examples:
 ```text
 chore(monorepo): add contributor documentation
 feat(shell-web): add account settings page
-fix(service-api): validate missing request body
+fix(program-api): validate missing request body
 ```
 
 ## Coding Agents
