@@ -56,20 +56,19 @@ Use the existing top-level workspace directories consistently:
 
 - `shells/*` for deployable application hosts that compose product features
 - `programs/*` for deployable backend programs and workers
-- `features/*` for vertical product features shared across shells or programs
-- `libs/*` for reusable libraries
-- `clients/*` for generated or hand-written external service api clients
+- `packages/*` for shared features, reusable libraries, and external service clients
 - `tools/*` for internal tooling packages
 - `infra/*` for local and shared infrastructure helpers
 
-Shell packages should stay thin. Use them for routing, layouts, providers,
-runtime wiring, deploy configuration, and feature composition. Put product
-behavior in `features/*`, and move reusable primitives that are not tied to a
-feature into `libs/*`.
+Shell and program packages are deployable entry points and should stay thin.
+Keep code used by only one deployable local to it, such as under
+`shells/web/src/features/*`. Move a feature or capability into `packages/*`
+when it becomes shared or needs an explicit public API and dependency boundary.
 
-Package names should use the repository npm scope and a clear package suffix,
-for example `@monorepo/shell-web`, `@monorepo/feature-billing`,
-`@monorepo/program-api`, or `@monorepo/lib-dates`.
+Do not apply category-based prefixes or suffixes to packages under `packages/*`.
+The directory name must match the package's `package.json` name, excluding the
+npm scope when present. For example, `packages/billing/package.json` uses the
+name `@monorepo/billing`.
 
 ## Dependency Management
 
