@@ -54,15 +54,14 @@ Useful focused commands:
 
 Use the existing top-level workspace directories consistently:
 
-- `shells/*` for deployable application hosts that compose product features
-- `programs/*` for deployable backend programs and workers
+- `programs/*` for deployable applications, APIs, workers, and other executables
 - `packages/*` for shared features, reusable libraries, and external service clients
 - `tools/*` for internal tooling packages
 - `infra/*` for local and shared infrastructure helpers
 
-Shell and program packages are deployable entry points and should stay thin.
+Programs are deployable entry points and should stay thin.
 Keep code used by only one deployable local to it, such as under
-`shells/web/src/features/*`. Move a feature or capability into `packages/*`
+`programs/web/src/features/*`. Move a feature or capability into `packages/*`
 when it becomes shared or needs an explicit public API and dependency boundary.
 
 Do not apply category-based prefixes or suffixes to packages under `packages/*`.
@@ -78,6 +77,19 @@ review.
 
 Use exact versions. The root `.npmrc` sets `save-exact=true` and
 `engine-strict=true`.
+
+## Documentation Comments
+
+Use JSDoc when it helps consumers understand an exported API. Use comments for
+non-obvious behavior, invariants, side effects, failure semantics, lifecycle
+requirements, intent, and tradeoffs.
+
+Private helpers with clear names and TypeScript types do not require JSDoc. Do
+not add `@param` or `@returns` tags when they merely repeat names and types
+already expressed by TypeScript. Tests, fixtures, and straightforward
+transformations generally do not need JSDoc.
+
+Comments should explain why, not restate what the code does.
 
 ## Commit Messages
 
@@ -107,8 +119,8 @@ Examples:
 
 ```text
 chore(monorepo): add contributor documentation
-feat(shell-web): add account settings page
-fix(program-api): validate missing request body
+feat(web): add account settings page
+fix(api): validate missing request body
 ```
 
 ## Coding Agents
