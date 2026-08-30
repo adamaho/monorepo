@@ -47,7 +47,7 @@ Useful focused commands:
 - `pnpm fmt` formats the repository
 - `pnpm fmt:check` checks formatting without writing changes
 - `pnpm lint` runs package lint tasks through Turbo
-- `pnpm test:unit` runs package unit test tasks through Turbo
+- `pnpm turbo run test:unit` runs package unit test tasks through Turbo
 - `pnpm tsc` runs package TypeScript tasks through Turbo
 
 ## Workspace Layout
@@ -77,6 +77,22 @@ review.
 
 Use exact versions. The root `.npmrc` sets `save-exact=true` and
 `engine-strict=true`.
+
+## Changesets
+
+Add a changeset when a pull request changes the public behavior of a publishable
+package:
+
+```bash
+pnpm changeset
+```
+
+Select every affected package, choose the appropriate semantic version bump,
+and commit the generated `.changeset/*.md` file with the change.
+
+A changeset is not required for documentation, infrastructure,
+application-only, or private-package changes. Run `pnpm changeset:status` to
+inspect pending releases.
 
 ## Documentation Comments
 
