@@ -10,6 +10,8 @@ allowBuilds:
   msgpackr-extract: true
 
 catalog:
+  "@adamaho/nopeus-oxlint-config": 0.1.2
+  "@adamaho/nopeus-oxlint-plugin": 0.1.2
   "@changesets/cli": 3.0.1
   "@effect/tsgo": 0.36.5
   oxfmt: 0.64.0
@@ -21,3 +23,7 @@ catalog:
 catalogMode: strict
 
 minimumReleaseAge: 1440
+
+minimumReleaseAgeExclude:
+  - "@adamaho/nopeus-oxlint-config"
+  - "@adamaho/nopeus-oxlint-plugin"
