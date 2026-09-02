@@ -5,19 +5,22 @@
   "scripts": {
     "changeset": "changeset",
     "changeset:status": "changeset status",
-    "check": "pnpm fmt:check && turbo run lint tsc",
+    "check": "pnpm fmt:check && pnpm lint && turbo run tsc",
     "clean": "turbo run clean && rimraf node_modules",
     "dev": "turbo run dev --ui=tui",
-    "lint": "turbo run lint",
+    "lint": "oxlint .",
     "fmt": "oxfmt --config ./tools/oxfmt-config/src/base.json .",
     "fmt:check": "oxfmt --check --config ./tools/oxfmt-config/src/base.json .",
     "tsc": "turbo run tsc",
     "version-packages": "changeset version"
   },
   "devDependencies": {
+    "@adamaho/nopeus-oxlint-config": "catalog:",
+    "@adamaho/nopeus-oxlint-plugin": "catalog:",
     "@changesets/cli": "catalog:",
     "@monorepo/tool-oxfmt-config": "workspace:*",
     "oxfmt": "catalog:",
+    "oxlint": "catalog:",
     "rimraf": "catalog:",
     "turbo": "catalog:"
   },
