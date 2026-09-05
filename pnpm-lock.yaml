@@ -7,17 +7,14 @@ settings:
 catalogs:
   default:
     '@adamaho/nopeus-oxlint-config':
-      specifier: 0.1.2
-      version: 0.1.2
+      specifier: 0.2.0
+      version: 0.2.0
     '@adamaho/nopeus-oxlint-plugin':
-      specifier: 0.1.2
-      version: 0.1.2
+      specifier: 0.2.0
+      version: 0.2.0
     '@changesets/cli':
       specifier: 3.0.1
       version: 3.0.1
-    '@effect/tsgo':
-      specifier: 0.36.5
-      version: 0.36.5
     oxfmt:
       specifier: 0.64.0
       version: 0.64.0
@@ -40,10 +37,10 @@ importers:
     devDependencies:
       '@adamaho/nopeus-oxlint-config':
         specifier: 'catalog:'
-        version: 0.1.2(oxlint@1.79.0)
+        version: 0.2.0(oxlint@1.79.0)
       '@adamaho/nopeus-oxlint-plugin':
         specifier: 'catalog:'
-        version: 0.1.2(oxlint@1.79.0)
+        version: 0.2.0(oxlint@1.79.0)
       '@changesets/cli':
         specifier: 'catalog:'
         version: 3.0.1
@@ -73,9 +70,6 @@ importers:
 
   tools/tsconfig:
     devDependencies:
-      '@effect/tsgo':
-        specifier: 'catalog:'
-        version: 0.36.5
       rimraf:
         specifier: 'catalog:'
         version: 6.1.3
@@ -85,14 +79,14 @@ importers:
 
 packages:
 
-  '@adamaho/nopeus-oxlint-config@0.1.2':
-    resolution: {integrity: sha512-ODBeOblBWBC6RCrfF7jNs+6rCVA/t5inKD4IRBJbFZH5ENLA4WiLKhPIArjxJFU95lsVtQDObBz6NTUyqg26ZQ==, tarball: https://npm.pkg.github.com/download/@adamaho/nopeus-oxlint-config/0.1.2/e7f6564b6acc7452403f53eab5810f5c79f6bd1d}
+  '@adamaho/nopeus-oxlint-config@0.2.0':
+    resolution: {integrity: sha512-UKHCm4X4WKdet9D/l6LyMS4dFoZWGbVVvsPL0tVddb+NpjUQj3x2JepccC8QWvivnITo45XByoUDYOySwOmfJg==, tarball: https://npm.pkg.github.com/download/@adamaho/nopeus-oxlint-config/0.2.0/a8085c03728ec7f7250f56e88d5ba3452c1551e8}
     engines: {node: ^22.18.0 || >=24.0.0}
     peerDependencies:
       oxlint: '>=1.79.0 <2'
 
-  '@adamaho/nopeus-oxlint-plugin@0.1.2':
-    resolution: {integrity: sha512-Kdj42qNOcIAB4ZyZuaxzRt7vajz54rUneIOLID6HyXVef05hWQST6LljJiNelGVbooAPsYhYkL0a5kUv0YDiXQ==, tarball: https://npm.pkg.github.com/download/@adamaho/nopeus-oxlint-plugin/0.1.2/6f50938a268d6d41577a89c35c76e16c10de367f}
+  '@adamaho/nopeus-oxlint-plugin@0.2.0':
+    resolution: {integrity: sha512-Q5ewPQushXdOgDgQwmBLq1MAlhyXqY2/rTwCx/P7CJuwM0AniP9RiVtQIoaJL/QHsKToROkB9QtTSHkLJzphZA==, tarball: https://npm.pkg.github.com/download/@adamaho/nopeus-oxlint-plugin/0.2.0/e63d1d369fb3b7785680bb72fa7172984d8ab1e1}
     engines: {node: ^22.18.0 || >=24.0.0}
     peerDependencies:
       oxlint: '>=1.79.0 <2'
@@ -165,45 +159,6 @@ packages:
   '@clack/prompts@1.7.0':
     resolution: {integrity: sha512-y7/yvZ2TPAnR9+jnc00klvNNLkJiXFFrQA/hlLCcxA9a2A4zQIOimyFQ9XfwYKiGD1fb5GY8vbKIIgO8d5Tb2A==}
     engines: {node: '>= 20.12.0'}
-
-  '@effect/tsgo-darwin-arm64@0.36.5':
-    resolution: {integrity: sha512-+JPS65Ekod5NS41Kg9OIyuUsygNcSw5/4Y+UNbY6Wob6dvP+CkEa51pGBAmHKQp3Z/D3g/A9GNE66ndu9kz8dw==}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@effect/tsgo-darwin-x64@0.36.5':
-    resolution: {integrity: sha512-S67mS1GTSvfeN5Tsij7QarJNuv3q7U/PMhjTbGtKO9mqgDTOA2IOlxq7YPIxkWq+AiOIv0H3aHGk7ToRjcPWxg==}
-    cpu: [x64]
-    os: [darwin]
-
-  '@effect/tsgo-linux-arm64@0.36.5':
-    resolution: {integrity: sha512-bNLzLrQ/4Sf0N7NlAqcEpr+g+RW/ERIvmSFQN9Nu+hSFti4Kx9Nrfo1LJ4V0qASry5Rj2DG4Wa9C5ydQAD9qqA==}
-    cpu: [arm64]
-    os: [linux]
-
-  '@effect/tsgo-linux-arm@0.36.5':
-    resolution: {integrity: sha512-UqtTPUgoVMRHAOcHiK7sddxjUEj6kOkXAlu4Y2TL/MhGiu81ZBzZrg8TXf0ApNeEMOD0EIK8hwU2kik8O+buxA==}
-    cpu: [arm]
-    os: [linux]
-
-  '@effect/tsgo-linux-x64@0.36.5':
-    resolution: {integrity: sha512-QWdyuUcAb1kZBeItycHg1ZKloNbVDtlVm1C0bbDVHqZIZ/d2rqhKi6Zajm64GnHtfdwPTn8Oi1iOCH1IYgo0IQ==}
-    cpu: [x64]
-    os: [linux]
-
-  '@effect/tsgo-win32-arm64@0.36.5':
-    resolution: {integrity: sha512-5tO5em1DfplFz5GqpQVGRSrAoE+kEgIc7Y0ClbT9jkxaK18IFVq9KIYybt4d6VT4+QnNQGdqWOahMcGE4JAZ8w==}
-    cpu: [arm64]
-    os: [win32]
-
-  '@effect/tsgo-win32-x64@0.36.5':
-    resolution: {integrity: sha512-pmaKwdYAIs9GFpMV9glIUks0UZDHE1/xwP6+GCGhSFxB76cDLMnrHr/IBt5VfGddT65SK+Dyw/vAtcX7fRp4KA==}
-    cpu: [x64]
-    os: [win32]
-
-  '@effect/tsgo@0.36.5':
-    resolution: {integrity: sha512-BHxVjeRK1/XlqYHWXkbT4W9JpOrT3sNA2wrfwQPBTojD5OSyxI2TUIltobYhWudyfuCrn770qP6uOpDjdrmghA==}
-    hasBin: true
 
   '@manypkg/find-root@3.1.0':
     resolution: {integrity: sha512-BcSqCyKhBVZ5YkSzOiheMCV41kqAFptW6xGqYSTjkVTl9XQpr+pqHhwgGCOHQtjDCv7Is6EFyA14Sm5GVbVABA==}
@@ -769,11 +724,11 @@ packages:
 
 snapshots:
 
-  '@adamaho/nopeus-oxlint-config@0.1.2(oxlint@1.79.0)':
+  '@adamaho/nopeus-oxlint-config@0.2.0(oxlint@1.79.0)':
     dependencies:
       oxlint: 1.79.0
 
-  '@adamaho/nopeus-oxlint-plugin@0.1.2(oxlint@1.79.0)':
+  '@adamaho/nopeus-oxlint-plugin@0.2.0(oxlint@1.79.0)':
     dependencies:
       '@oxlint/plugins': 1.79.0
       oxlint: 1.79.0
@@ -893,37 +848,6 @@ snapshots:
       fast-string-width: 3.0.2
       fast-wrap-ansi: 0.2.2
       sisteransi: 1.0.5
-
-  '@effect/tsgo-darwin-arm64@0.36.5':
-    optional: true
-
-  '@effect/tsgo-darwin-x64@0.36.5':
-    optional: true
-
-  '@effect/tsgo-linux-arm64@0.36.5':
-    optional: true
-
-  '@effect/tsgo-linux-arm@0.36.5':
-    optional: true
-
-  '@effect/tsgo-linux-x64@0.36.5':
-    optional: true
-
-  '@effect/tsgo-win32-arm64@0.36.5':
-    optional: true
-
-  '@effect/tsgo-win32-x64@0.36.5':
-    optional: true
-
-  '@effect/tsgo@0.36.5':
-    optionalDependencies:
-      '@effect/tsgo-darwin-arm64': 0.36.5
-      '@effect/tsgo-darwin-x64': 0.36.5
-      '@effect/tsgo-linux-arm': 0.36.5
-      '@effect/tsgo-linux-arm64': 0.36.5
-      '@effect/tsgo-linux-x64': 0.36.5
-      '@effect/tsgo-win32-arm64': 0.36.5
-      '@effect/tsgo-win32-x64': 0.36.5
 
   '@manypkg/find-root@3.1.0':
     dependencies:
