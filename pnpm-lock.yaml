@@ -10,8 +10,8 @@ catalogs:
       specifier: 0.2.0
       version: 0.2.0
     '@adamaho/nopeus-oxlint-plugin':
-      specifier: 0.2.0
-      version: 0.2.0
+      specifier: 0.3.0
+      version: 0.3.0
     '@changesets/cli':
       specifier: 3.0.1
       version: 3.0.1
@@ -55,7 +55,7 @@ importers:
         version: 0.2.0(oxlint@1.79.0)
       '@adamaho/nopeus-oxlint-plugin':
         specifier: 'catalog:'
-        version: 0.2.0(oxlint@1.79.0)
+        version: 0.3.0(oxlint@1.79.0)
       '@changesets/cli':
         specifier: 'catalog:'
         version: 3.0.1
@@ -115,8 +115,8 @@ packages:
     peerDependencies:
       oxlint: '>=1.79.0 <2'
 
-  '@adamaho/nopeus-oxlint-plugin@0.2.0':
-    resolution: {integrity: sha512-Q5ewPQushXdOgDgQwmBLq1MAlhyXqY2/rTwCx/P7CJuwM0AniP9RiVtQIoaJL/QHsKToROkB9QtTSHkLJzphZA==, tarball: https://npm.pkg.github.com/download/@adamaho/nopeus-oxlint-plugin/0.2.0/e63d1d369fb3b7785680bb72fa7172984d8ab1e1}
+  '@adamaho/nopeus-oxlint-plugin@0.3.0':
+    resolution: {integrity: sha512-ALGULBCUiMeKmdzG4YQRnW1PVe7/FgZoMzdgrHx7KoBCBImroEfQivFLxjoALwxCQ1SOepKSU/z2RX5CUR4D2w==, tarball: https://npm.pkg.github.com/download/@adamaho/nopeus-oxlint-plugin/0.3.0/21be6c1416fa7d8407e6072f10ac3a15200391aa}
     engines: {node: ^22.18.0 || >=24.0.0}
     peerDependencies:
       oxlint: '>=1.79.0 <2'
@@ -1409,7 +1409,7 @@ snapshots:
     dependencies:
       oxlint: 1.79.0
 
-  '@adamaho/nopeus-oxlint-plugin@0.2.0(oxlint@1.79.0)':
+  '@adamaho/nopeus-oxlint-plugin@0.3.0(oxlint@1.79.0)':
     dependencies:
       '@oxlint/plugins': 1.79.0
       oxlint: 1.79.0
