@@ -12,12 +12,15 @@
     "fmt": "oxfmt --config ./tools/oxfmt-config/src/base.json .",
     "fmt:check": "oxfmt --check --config ./tools/oxfmt-config/src/base.json .",
     "tsc": "turbo run tsc",
-    "version-packages": "changeset version"
+    "version-packages": "changeset version",
+    "prepare": "effect-tsgo patch"
   },
   "devDependencies": {
     "@adamaho/nopeus-oxlint-config": "catalog:",
     "@adamaho/nopeus-oxlint-plugin": "catalog:",
+    "@adamaho/nopeus-tsconfig": "catalog:",
     "@changesets/cli": "catalog:",
+    "@effect/tsgo": "catalog:",
     "@effect/vitest": "catalog:",
     "@monorepo/tool-oxfmt-config": "workspace:*",
     "@types/node": "catalog:",
@@ -26,6 +29,7 @@
     "oxlint": "catalog:",
     "rimraf": "catalog:",
     "turbo": "catalog:",
+    "typescript": "catalog:",
     "vitest": "catalog:"
   },
   "engines": {
