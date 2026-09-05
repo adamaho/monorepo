@@ -6,14 +6,13 @@
   "exports": {
     "./base": "./src/base.json",
     "./service": "./src/service.json",
-    "./app-vite": "./src/app-vite.json"
+    "./app-vite": "./src/app-vite.json",
+    "./effect": "./src/effect.json"
   },
   "scripts": {
-    "clean": "rimraf node_modules dist build .turbo coverage",
-    "prepare": "effect-tsgo patch"
+    "clean": "rimraf node_modules dist build .turbo coverage"
   },
   "devDependencies": {
-    "@effect/tsgo": "catalog:",
     "rimraf": "catalog:",
     "typescript": "catalog:"
   }

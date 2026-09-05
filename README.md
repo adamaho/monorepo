@@ -6,6 +6,10 @@ development environment and project structure.
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for the development workflow,
 verification commands, workspace conventions, and commit guidelines.
 
+Linting combines the built-in Nopeus config with the plugin's general `/base`
+preset. The template installs no Effect tooling. Effect projects can opt into
+the [Effect syntax and compiler setup](tools/tsconfig/README.md#optional-effect-support).
+
 ## Prerequisites
 
 Before developing in this repository, install:
