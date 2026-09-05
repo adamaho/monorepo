@@ -18,11 +18,15 @@
     "@adamaho/nopeus-oxlint-config": "catalog:",
     "@adamaho/nopeus-oxlint-plugin": "catalog:",
     "@changesets/cli": "catalog:",
+    "@effect/vitest": "catalog:",
     "@monorepo/tool-oxfmt-config": "workspace:*",
+    "@types/node": "catalog:",
+    "effect": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
     "rimraf": "catalog:",
-    "turbo": "catalog:"
+    "turbo": "catalog:",
+    "vitest": "catalog:"
   },
   "engines": {
     "node": "^24.15.0",
