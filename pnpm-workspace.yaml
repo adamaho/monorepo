@@ -12,6 +12,7 @@ allowBuilds:
 catalog:
   "@adamaho/nopeus-oxlint-config": 0.2.0
   "@adamaho/nopeus-oxlint-plugin": 0.3.0
+  "@adamaho/nopeus-tsconfig": 0.2.0
   "@changesets/cli": 3.0.1
   "@effect/tsgo": 0.41.0
   "@effect/vitest": 4.0.0-rc.112
@@ -31,3 +32,4 @@ minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - "@adamaho/nopeus-oxlint-config"
   - "@adamaho/nopeus-oxlint-plugin"
+  - "@adamaho/nopeus-tsconfig"

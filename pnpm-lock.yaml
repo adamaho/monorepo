@@ -12,6 +12,9 @@ catalogs:
     '@adamaho/nopeus-oxlint-plugin':
       specifier: 0.3.0
       version: 0.3.0
+    '@adamaho/nopeus-tsconfig':
+      specifier: 0.2.0
+      version: 0.2.0
     '@changesets/cli':
       specifier: 3.0.1
       version: 3.0.1
@@ -97,6 +100,9 @@ importers:
 
   tools/tsconfig:
     devDependencies:
+      '@adamaho/nopeus-tsconfig':
+        specifier: 'catalog:'
+        version: 0.2.0
       '@effect/tsgo':
         specifier: 'catalog:'
         version: 0.41.0
@@ -120,6 +126,9 @@ packages:
     engines: {node: ^22.18.0 || >=24.0.0}
     peerDependencies:
       oxlint: '>=1.79.0 <2'
+
+  '@adamaho/nopeus-tsconfig@0.2.0':
+    resolution: {integrity: sha512-HGLN8GcVBguKogCrXIYft3DEDjWEJ4U3kmFKDziv/Hzd05220dtK7msNwibw2XznhzzwKd4dBX0lZB76LcenJA==, tarball: https://npm.pkg.github.com/download/@adamaho/nopeus-tsconfig/0.2.0/21ef79da8bbbec584116aee49f64c2fcac097a0c}
 
   '@changesets/apply-release-plan@8.0.0':
     resolution: {integrity: sha512-kUd2pbf1w5/AYmBMb0Tt+rkIPCjFJdT0SZMrkOjJT/WV/QbtmvkyB5jkV0oaNPheavprZk+SfUiozUti7TIL2w==}
@@ -1413,6 +1422,8 @@ snapshots:
     dependencies:
       '@oxlint/plugins': 1.79.0
       oxlint: 1.79.0
+
+  '@adamaho/nopeus-tsconfig@0.2.0': {}
 
   '@changesets/apply-release-plan@8.0.0':
     dependencies:
