@@ -30,6 +30,26 @@ Start local infrastructure when a package needs shared runtime services:
 pnpm --filter=@monorepo/infra-local run infra:up
 ```
 
+### Amp Orbs
+
+`.agents/setup` installs Nix, realizes the development shell from `flake.lock`,
+and installs workspace dependencies with the frozen pnpm lockfile. Amp caches
+the resulting environment for fresh orbs; warm setup reuses installed tools and
+the pnpm store. A repository-scoped login profile hook activates the complete
+Nix environment for agents and supervised services, including in subdirectories.
+`.agents/resume` does not reinstall dependencies or start services.
+
+Before creating an orb, configure an Amp project secret named `NODE_AUTH_TOKEN`
+with GitHub Packages read access to the `@adamaho` dependencies. Repository
+access alone does not necessarily grant package access. Setup uses a temporary
+npm configuration referencing the environment variable and removes it on exit;
+it never writes the token to repository files or the Nix environment.
+
+No database is started automatically: the template currently has no application
+or tests requiring one. The Nix shell includes Docker clients, but a running
+Docker daemon is not provisioned by orb setup. Add supervised services when a
+future application needs them.
+
 ## Verification
 
 Run the full local verification command before opening a PR or committing a
