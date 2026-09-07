@@ -16,8 +16,19 @@ Install these before working in the repo:
 Install dependencies:
 
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 ```
+
+The private `@adamaho` dependencies require GitHub Packages authentication.
+Export `NODE_AUTH_TOKEN` with a classic personal access token that has
+`read:packages`, then reference the environment variable from a user npm config:
+
+```ini
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+```
+
+Do not commit a token. CI and `.agents/setup` create and remove a temporary user
+config automatically.
 
 Start local infrastructure when a package needs shared runtime services:
 
@@ -72,6 +83,31 @@ review.
 
 Use exact versions. The root `.npmrc` sets `save-exact=true` and
 `engine-strict=true`.
+
+pnpm applies the `minimumReleaseAge` policy in `pnpm-workspace.yaml` to direct
+and transitive dependencies and re-verifies the committed lockfile during
+installation. The policy is strict and fails closed unless a release is at
+least 24 hours old. This delay gives registries and security scanners time to
+remove compromised releases without making routine dependency work onerous.
+
+The private first-party `@adamaho` packages currently consumed by the template
+are excluded by exact package name so their deliberate releases can be tested
+immediately. Do not broaden these entries to the whole scope. For an urgent
+third-party update, add a version-specific exclusion such as `package@1.2.3`,
+explain it in the pull request, and remove it after the release is 24 hours old.
+pnpm automatically prunes exclusions that no longer resolve in the lockfile.
+
+The `gh:` catalog specifiers bind private dependencies to GitHub Packages in
+the lockfile. Keep that registry qualification when updating them. Template
+consumers must remove or replace the `@adamaho` authentication, specifiers, and
+age exceptions if they stop consuming these packages or move them to another
+registry.
+
+When upgrading pnpm, keep the exact version aligned in `packageManager`, the
+pnpm engine, `.agents/setup`, and the prerequisite documentation. Refresh the
+`packageManager` SHA-512 hash from the published package integrity, then
+regenerate and commit the lockfile with that exact pnpm release. CI reads the
+version from `packageManager` and requires the committed lockfile.
 
 ## Changesets
 
