@@ -3,48 +3,66 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
-export NIX_CONFIG="${NIX_CONFIG:-}
-experimental-features = nix-command flakes"
+SECONDS=0
+readonly node_version="24.15.0"
+readonly pnpm_version="12.3.4"
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PNPM_HOME/bin:$PATH"
 
-echo "Preparing Nix"
-if ! command -v nix >/dev/null && [[ ! -x "$HOME/.nix-profile/bin/nix" ]]; then
+: "${NODE_AUTH_TOKEN:?Set the Amp project NODE_AUTH_TOKEN secret to a token with read:packages access to @adamaho packages.}"
+export NODE_AUTH_TOKEN
+
+if ! docker compose version >/dev/null 2>&1; then
+  echo "Installing the Docker Compose plugin..."
+  sudo apt-get update
+  sudo apt-get install -y docker-compose-plugin
+fi
+
+installed_pnpm_version=""
+if [[ -x "$PNPM_HOME/bin/pnpm" ]]; then
+  installed_pnpm_version="$(cd "$HOME" && "$PNPM_HOME/bin/pnpm" --version 2>/dev/null || true)"
+fi
+if [[ "$installed_pnpm_version" != "$pnpm_version" ]]; then
+  echo "Installing pnpm $pnpm_version..."
   installer="$(mktemp)"
   trap 'rm -f "$installer"' EXIT
-  curl --fail --location --retry 3 https://releases.nixos.org/nix/nix-2.34.1/install -o "$installer"
-  if [[ ! -d /nix ]]; then
-    sudo install -d -m 0755 -o "$(id -u)" -g "$(id -g)" /nix
-  fi
-  time bash "$installer" --no-daemon --yes --no-modify-profile
-fi
-if [[ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]]; then
-  source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  curl --fail --location --retry 3 https://get.pnpm.io/install.sh -o "$installer"
+  PNPM_VERSION="$pnpm_version" ENV="$HOME/.bashrc" SHELL=/bin/bash sh "$installer"
+  rm -f "$installer"
+  trap - EXIT
 fi
 
-echo "Realizing the locked development shell"
-time nix print-dev-env --no-write-lock-file "$repo_root" > /dev/null
-
-# Activate the complete shell for Amp and supervised services, not just setup.
-marker="# monorepo orb development shell"
-if ! grep -Fqx "$marker" "$HOME/.bash_profile" 2>/dev/null; then
-  cat >> "$HOME/.bash_profile" <<EOF
-
-$marker
-if [[ -z "\${IN_NIX_SHELL:-}" && ( "\$PWD" == "$repo_root" || "\$PWD" == "$repo_root/"* ) ]]; then
-  if [[ -f "\$HOME/.nix-profile/etc/profile.d/nix.sh" ]]; then
-    source "\$HOME/.nix-profile/etc/profile.d/nix.sh"
-  fi
-  eval "\$(nix --extra-experimental-features 'nix-command flakes' print-dev-env --no-write-lock-file "$repo_root")"
+if [[ ! -x "$PNPM_HOME/bin/node" ]] || [[ "$("$PNPM_HOME/bin/node" --version)" != "v$node_version" ]]; then
+  echo "Installing Node.js $node_version through pnpm (${SECONDS}s elapsed)..."
+  "$PNPM_HOME/bin/pnpm" runtime set node "$node_version" --global
 fi
+
+mkdir -p "$HOME/.config/amp"
+cat > "$HOME/.config/amp/monorepo-env.bash" <<EOF
+export PNPM_HOME="$PNPM_HOME"
+case ":\$PATH:" in
+  *":\$PNPM_HOME/bin:"*) ;;
+  *) export PATH="\$PNPM_HOME/bin:\$PATH" ;;
+esac
 EOF
-fi
+marker="# monorepo orb Node.js and pnpm environment"
+touch "$HOME/.bash_profile"
+sed -i \
+  -e '\|^# monorepo orb development shell$|d' \
+  -e '\|^# monorepo orb Node.js and pnpm environment$|d' \
+  -e '\|^source "\$HOME/.config/amp/monorepo-env.bash"$|d' \
+  "$HOME/.bash_profile"
+printf '\n%s\n%s\n' "$marker" 'source "$HOME/.config/amp/monorepo-env.bash"' >> "$HOME/.bash_profile"
 
-echo "Installing locked workspace dependencies"
-# pnpm selects the exact packageManager version from package.json.
-# Registry credentials must come from the environment, never the snapshot.
-if [[ -n "${NODE_AUTH_TOKEN:-}" ]]; then
-  npmrc="$(mktemp)"
-  trap 'rm -f "${installer:-}" "$npmrc"' EXIT
-  printf '%s\n' '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' > "$npmrc"
-  export NPM_CONFIG_USERCONFIG="$npmrc"
+echo "Using Node.js $(node --version) and pnpm $(pnpm --version)."
+echo "Installing locked workspace dependencies (${SECONDS}s elapsed)..."
+# GitHub Packages requires authentication even for public packages. Keep the
+# credential out of the snapshot and expand it from the Amp secret at runtime.
+touch "$HOME/.npmrc"
+chmod 0600 "$HOME/.npmrc"
+if ! grep -Fqx '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' "$HOME/.npmrc"; then
+  printf '%s\n' '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' >> "$HOME/.npmrc"
 fi
-time nix develop --no-write-lock-file --command pnpm install --frozen-lockfile
+pnpm install --frozen-lockfile
+
+echo "Orb setup completed in ${SECONDS}s."
