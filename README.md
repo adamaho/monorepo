@@ -33,6 +33,3 @@ Install dependencies with the versions declared in `package.json`:
 ```bash
 pnpm install
 ```
-
-Amp orbs run `.agents/setup`, which installs the pinned pnpm and Node.js versions
-and configures GitHub Packages authentication from `NODE_AUTH_TOKEN`.
