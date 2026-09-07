@@ -56,14 +56,10 @@ printf '\n%s\n%s\n' "$marker" 'source "$HOME/.config/amp/monorepo-env.bash"' >> 
 
 echo "Using Node.js $(node --version) and pnpm $(pnpm --version)."
 echo "Installing locked workspace dependencies (${SECONDS}s elapsed)..."
-# GitHub Packages requires authentication even for public packages. Keep the
-# credential out of the snapshot and persistent user configuration.
-auth_config="$(mktemp)"
-trap 'rm -f "$auth_config"' EXIT
-chmod 0600 "$auth_config"
-printf '%s\n' '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' > "$auth_config"
-NPM_CONFIG_USERCONFIG="$auth_config" pnpm install --frozen-lockfile
-rm -f "$auth_config"
-trap - EXIT
+export PNPM_CONFIG__AUTH
+PNPM_CONFIG__AUTH="$(jq --compact-output --null-input --arg token "$NODE_AUTH_TOKEN" \
+  '{"https://npm.pkg.github.com":{"@adamaho":{"authToken":$token}}}')"
+pnpm install --frozen-lockfile
+unset PNPM_CONFIG__AUTH
 
 echo "Orb setup completed in ${SECONDS}s."

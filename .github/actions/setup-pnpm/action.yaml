@@ -4,28 +4,12 @@ description: Setup Node.js, pnpm, and install dependencies.
 runs:
   using: composite
   steps:
-    - name: Configure private registry authentication
-      id: npm-auth
-      shell: bash
-      env:
-        NODE_AUTH_TOKEN: ${{ github.token }}
-      run: |
-        auth_config="$(mktemp "$RUNNER_TEMP/npmrc.XXXXXX")"
-        chmod 0600 "$auth_config"
-        printf '%s\n' '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' > "$auth_config"
-        echo "path=$auth_config" >> "$GITHUB_OUTPUT"
-
     - name: Setup pnpm, Node.js, cache, and dependencies
       uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
       env:
         NODE_AUTH_TOKEN: ${{ github.token }}
-        NPM_CONFIG_USERCONFIG: ${{ steps.npm-auth.outputs.path }}
+        PNPM_CONFIG__AUTH: '{"https://npm.pkg.github.com":{"@adamaho":{"authToken":"${{ github.token }}"}}}'
       with:
         runtime: node@24.15.0
         cache: true
         require-lockfile: true
-
-    - name: Remove private registry authentication
-      if: always()
-      shell: bash
-      run: rm -f "${{ steps.npm-auth.outputs.path }}"

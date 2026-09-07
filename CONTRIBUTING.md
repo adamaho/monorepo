@@ -20,15 +20,23 @@ pnpm install --frozen-lockfile
 ```
 
 The private `@adamaho` dependencies require GitHub Packages authentication.
-Export `NODE_AUTH_TOKEN` with a classic personal access token that has
-`read:packages`, then reference the environment variable from a user npm config:
+Configure `NODE_AUTH_TOKEN` as a personal Amp secret containing a classic
+personal access token with `read:packages`. The personal secret applies to all
+of that developer's project orbs and is preferred over duplicating project
+secrets. Use a workspace secret containing a read-only machine-user token only
+for shared unattended access. The committed `.npmrc` contains only the registry
+route. Setup passes the secret to pnpm in a host-bound environment setting, so
+no credential is written to the repository or filesystem.
 
-```ini
-//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
-```
+GitHub Actions uses its short-lived `GITHUB_TOKEN` instead. Each private package
+must grant this consumer repository read access under **Manage Actions access**,
+and the workflow must retain `packages: read` permission.
 
-Do not commit a token. CI and `.agents/setup` create and remove a temporary user
-config automatically.
+Do not put `${NODE_AUTH_TOKEN}` in the project `.npmrc`. pnpm deliberately does
+not expand credential placeholders from repository-controlled config. Orb setup
+and CI use pnpm's structured `_auth` environment setting instead, binding the
+token to both `npm.pkg.github.com` and `@adamaho` so a checkout cannot redirect
+it to another registry.
 
 Start local infrastructure when a package needs shared runtime services:
 
@@ -96,6 +104,12 @@ immediately. Do not broaden these entries to the whole scope. For an urgent
 third-party update, add a version-specific exclusion such as `package@1.2.3`,
 explain it in the pull request, and remove it after the release is 24 hours old.
 pnpm automatically prunes exclusions that no longer resolve in the lockfile.
+
+Nopeus release automation may open exact-version update pull requests in this
+consumer. Those updates must preserve the `gh:` catalog specifier, regenerate
+the lockfile with the exact pinned pnpm version, and pass the frozen install in
+CI. The package-name release-age exclusions intentionally allow these
+first-party updates to be validated immediately after publication.
 
 The `gh:` catalog specifiers bind private dependencies to GitHub Packages in
 the lockfile. Keep that registry qualification when updating them. Template

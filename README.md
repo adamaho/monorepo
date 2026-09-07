@@ -38,9 +38,10 @@ pnpm install --frozen-lockfile
 ```
 
 The repository routes `@adamaho` packages to GitHub Packages. Set
-`NODE_AUTH_TOKEN` to a classic personal access token with `read:packages`, and
-reference it from a user npm config rather than committing a credential:
-
-```ini
-//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
-```
+`NODE_AUTH_TOKEN` as a personal Amp secret containing a classic personal access
+token with `read:packages`. A personal secret is preferred because one setting
+works in all of that developer's project orbs. Use a workspace secret containing
+a read-only machine-user token only when shared unattended access is required.
+The committed `.npmrc` contains only the registry route. Setup passes the secret
+to pnpm through its host-and-scope-bound `_auth` environment setting, so no
+credential is written to the repository or filesystem.
