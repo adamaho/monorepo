@@ -105,9 +105,8 @@ registry.
 
 When upgrading pnpm, keep the exact version aligned in `packageManager`, the
 pnpm engine, `.agents/setup`, and the prerequisite documentation. Refresh the
-`packageManager` SHA-512 hash from the published package integrity, then
-regenerate and commit the lockfile with that exact pnpm release. CI reads the
-version from `packageManager` and requires the committed lockfile.
+lockfile with that exact pnpm release and commit the result. CI reads the version
+from `packageManager` and requires the committed lockfile.
 
 ## Changesets
 
