@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$repo_root"
+export NIX_CONFIG="${NIX_CONFIG:-}
+experimental-features = nix-command flakes"
+
+echo "Preparing Nix"
+if ! command -v nix >/dev/null && [[ ! -x "$HOME/.nix-profile/bin/nix" ]]; then
+  installer="$(mktemp)"
+  trap 'rm -f "$installer"' EXIT
+  curl --fail --location --retry 3 https://releases.nixos.org/nix/nix-2.34.1/install -o "$installer"
+  if [[ ! -d /nix ]]; then
+    sudo install -d -m 0755 -o "$(id -u)" -g "$(id -g)" /nix
+  fi
+  time bash "$installer" --no-daemon --yes --no-modify-profile
+fi
+if [[ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]]; then
+  source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+fi
+
+echo "Realizing the locked development shell"
+time nix print-dev-env --no-write-lock-file "$repo_root" > /dev/null
+
+# Activate the complete shell for Amp and supervised services, not just setup.
+marker="# monorepo orb development shell"
+if ! grep -Fqx "$marker" "$HOME/.bash_profile" 2>/dev/null; then
+  cat >> "$HOME/.bash_profile" <<EOF
+
+$marker
+if [[ -z "\${IN_NIX_SHELL:-}" && ( "\$PWD" == "$repo_root" || "\$PWD" == "$repo_root/"* ) ]]; then
+  if [[ -f "\$HOME/.nix-profile/etc/profile.d/nix.sh" ]]; then
+    source "\$HOME/.nix-profile/etc/profile.d/nix.sh"
+  fi
+  eval "\$(nix --extra-experimental-features 'nix-command flakes' print-dev-env --no-write-lock-file "$repo_root")"
+fi
+EOF
+fi
+
+echo "Installing locked workspace dependencies"
+# pnpm selects the exact packageManager version from package.json.
+# Registry credentials must come from the environment, never the snapshot.
+if [[ -n "${NODE_AUTH_TOKEN:-}" ]]; then
+  npmrc="$(mktemp)"
+  trap 'rm -f "${installer:-}" "$npmrc"' EXIT
+  printf '%s\n' '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' > "$npmrc"
+  export NPM_CONFIG_USERCONFIG="$npmrc"
+fi
+time nix develop --no-write-lock-file --command pnpm install --frozen-lockfile
