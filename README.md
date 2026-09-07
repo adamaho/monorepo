@@ -42,6 +42,7 @@ The repository routes `@adamaho` packages to GitHub Packages. Set
 token with `read:packages`. A personal secret is preferred because one setting
 works in all of that developer's project orbs. Use a workspace secret containing
 a read-only machine-user token only when shared unattended access is required.
-The committed `.npmrc` contains only the registry route. Setup passes the secret
-to pnpm through its host-and-scope-bound `_auth` environment setting, so no
-credential is written to the repository or filesystem.
+The committed `.npmrc` contains only the registry route and a
+`${NODE_AUTH_TOKEN}` reference, never the credential value. Orb setup marks this
+trusted repository file as pnpm's auth file and persists that setting so later
+`pnpm add` and `pnpm update` commands use the same authentication.

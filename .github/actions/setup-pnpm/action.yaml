@@ -8,7 +8,7 @@ runs:
       uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
       env:
         NODE_AUTH_TOKEN: ${{ github.token }}
-        PNPM_CONFIG__AUTH: '{"https://npm.pkg.github.com":{"@adamaho":{"authToken":"${{ github.token }}"}}}'
+        PNPM_CONFIG_NPMRC_AUTH_FILE: ${{ github.workspace }}/.npmrc
       with:
         runtime: node@24.15.0
         cache: true

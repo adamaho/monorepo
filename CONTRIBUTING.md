@@ -25,18 +25,18 @@ personal access token with `read:packages`. The personal secret applies to all
 of that developer's project orbs and is preferred over duplicating project
 secrets. Use a workspace secret containing a read-only machine-user token only
 for shared unattended access. The committed `.npmrc` contains only the registry
-route. Setup passes the secret to pnpm in a host-bound environment setting, so
-no credential is written to the repository or filesystem.
+route and a `${NODE_AUTH_TOKEN}` reference, never the credential value. Orb
+setup marks this trusted repository file as pnpm's auth file and persists that
+setting for later dependency operations.
 
 GitHub Actions uses its short-lived `GITHUB_TOKEN` instead. Each private package
 must grant this consumer repository read access under **Manage Actions access**,
 and the workflow must retain `packages: read` permission.
 
-Do not put `${NODE_AUTH_TOKEN}` in the project `.npmrc`. pnpm deliberately does
-not expand credential placeholders from repository-controlled config. Orb setup
-and CI use pnpm's structured `_auth` environment setting instead, binding the
-token to both `npm.pkg.github.com` and `@adamaho` so a checkout cannot redirect
-it to another registry.
+`PNPM_CONFIG_NPMRC_AUTH_FILE` explicitly opts this trusted repository into
+environment expansion for its `.npmrc`. Do not copy this setting to repositories
+whose changes are not trusted or add another registry to the file without
+reviewing where the token would be sent.
 
 Start local infrastructure when a package needs shared runtime services:
 
@@ -89,8 +89,8 @@ Prefer centralizing shared dependency versions in `pnpm-workspace.yaml` using
 the catalog. This keeps package manifests small and makes upgrades easier to
 review.
 
-Use exact versions. The root `.npmrc` sets `save-exact=true` and
-`engine-strict=true`.
+Use exact versions. `pnpm-workspace.yaml` sets `saveExact: true` and
+`engineStrict: true`.
 
 pnpm applies the `minimumReleaseAge` policy in `pnpm-workspace.yaml` to direct
 and transitive dependencies and re-verifies the committed lockfile during

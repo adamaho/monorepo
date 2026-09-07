@@ -7,6 +7,7 @@ SECONDS=0
 readonly node_version="24.15.0"
 readonly pnpm_version="12.3.4"
 export PNPM_HOME="$HOME/.local/share/pnpm"
+export PNPM_CONFIG_NPMRC_AUTH_FILE="$repo_root/.npmrc"
 export PATH="$PNPM_HOME/bin:$PATH"
 
 : "${NODE_AUTH_TOKEN:?Set the Amp project NODE_AUTH_TOKEN secret to a token with read:packages access to @adamaho packages.}"
@@ -40,6 +41,7 @@ fi
 mkdir -p "$HOME/.config/amp"
 cat > "$HOME/.config/amp/monorepo-env.bash" <<EOF
 export PNPM_HOME="$PNPM_HOME"
+export PNPM_CONFIG_NPMRC_AUTH_FILE="$repo_root/.npmrc"
 case ":\$PATH:" in
   *":\$PNPM_HOME/bin:"*) ;;
   *) export PATH="\$PNPM_HOME/bin:\$PATH" ;;
@@ -56,10 +58,6 @@ printf '\n%s\n%s\n' "$marker" 'source "$HOME/.config/amp/monorepo-env.bash"' >> 
 
 echo "Using Node.js $(node --version) and pnpm $(pnpm --version)."
 echo "Installing locked workspace dependencies (${SECONDS}s elapsed)..."
-export PNPM_CONFIG__AUTH
-PNPM_CONFIG__AUTH="$(jq --compact-output --null-input --arg token "$NODE_AUTH_TOKEN" \
-  '{"https://npm.pkg.github.com":{"@adamaho":{"authToken":$token}}}')"
 pnpm install --frozen-lockfile
-unset PNPM_CONFIG__AUTH
 
 echo "Orb setup completed in ${SECONDS}s."
