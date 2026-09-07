@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# No services or authentication need repair in this template. Toolchains and
-# dependencies live in the setup snapshot; the login profile restores PATH.
-echo "No resume repairs needed; dependency installation is handled by setup."
+# Oxlint's JavaScript-plugin raw transfer reserves a multi-GiB virtual buffer
+# without using that much physical RAM. Constrained no-swap Linux environments
+# may reject it under commit accounting. Kernel settings can reset when an orb
+# wakes, so temporarily repair them until oxc issue #20331 is resolved.
+if [[ -r /proc/sys/vm/overcommit_memory ]] &&
+  [[ "$(cat /proc/sys/vm/overcommit_memory)" != 1 ]]; then
+  if ! sudo -n sysctl -w vm.overcommit_memory=1 >/dev/null; then
+    echo "Warning: cannot enable memory overcommit; Oxlint may fail in this environment." >&2
+  fi
+fi
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PNPM_CONFIG_NPMRC_AUTH_FILE="$repo_root/.npmrc"
+export PATH="$PNPM_HOME/bin:$PATH"
+
+echo "Monorepo ready: Node $(node --version), pnpm $(pnpm --version)."

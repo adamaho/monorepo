@@ -38,6 +38,21 @@ environment expansion for its `.npmrc`. Do not copy this setting to repositories
 whose changes are not trusted or add another registry to the file without
 reviewing where the token would be sent.
 
+### Constrained Linux Orbs
+
+Oxlint JavaScript plugins reserve a multi-gigabyte virtual address range while
+using much less physical memory. Constrained Linux environments with no swap can
+reject that reservation under kernel commit accounting and panic in the
+allocator. Until [oxc issue #20331](https://github.com/oxc-project/oxc/issues/20331)
+is resolved, `.agents/resume` requests `vm.overcommit_memory=1` on every orb wake
+when non-interactive `sudo` permits it.
+
+This changes a host-wide Linux memory policy, not the orb's physical memory or
+cgroup limit. The hook leaves unsupported or unprivileged platforms unchanged
+and warns that Oxlint may still fail. Template consumers using Oxlint JavaScript
+plugins should retain the workaround; remove it when the upstream allocator no
+longer requires the large reservation.
+
 Start local infrastructure when a package needs shared runtime services:
 
 ```bash

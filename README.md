@@ -27,6 +27,8 @@ Docker development setup unless a change is required for the new project.
 Review the @adamaho registry authentication and minimumReleaseAge exclusions:
 retain them only while the new project consumes those private packages, and
 replace them with narrowly scoped first-party exceptions when appropriate.
+Preserve the .agents/resume Oxlint overcommit workaround while the project uses
+Oxlint JavaScript plugins and oxc issue #20331 remains unresolved.
 ```
 
 ## Development
