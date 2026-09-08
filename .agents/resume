@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-# No services or authentication need repair in this template. Toolchains and
-# dependencies live in the setup snapshot; the login profile restores PATH.
-echo "No resume repairs needed; dependency installation is handled by setup."

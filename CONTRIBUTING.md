@@ -7,11 +7,16 @@ to carry forward into future projects created from the template.
 
 Install these before working in the repo:
 
-- [Node.js 24](https://nodejs.org/en/download)
-- [pnpm 12.3.4](https://pnpm.io/installation)
+- [Nix](https://nixos.org/download/)
 - [Docker](https://docs.docker.com/get-docker/)
 
 ## Development Setup
+
+Enter the Nix development shell before running project commands:
+
+```bash
+nix develop
+```
 
 Install dependencies:
 
@@ -136,10 +141,17 @@ fix(api): validate missing request body
 
 ## Coding Agents
 
-Coding agents should use the Node.js and pnpm versions declared in
-`package.json`. Verify their versions before running project commands:
+Start coding agents from inside the Nix shell so their commands use the same
+toolchain as local development:
 
 ```bash
-node --version
-pnpm --version
+nix develop
+opencode
+```
+
+If an agent was not started inside `nix develop`, run verification commands
+through Nix explicitly:
+
+```bash
+nix develop --command pnpm check
 ```
