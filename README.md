@@ -10,8 +10,9 @@ verification commands, workspace conventions, and commit guidelines.
 
 Before developing in this repository, install:
 
-- [Nix](https://nixos.org/download/)
-- [Docker](https://docs.docker.com/get-docker/)
+- [Node.js](https://nodejs.org/en/download) 24, matching `engines.node` in `package.json`
+- [pnpm](https://pnpm.io/installation) at the version pinned in `packageManager`
+- [Docker with Compose](https://docs.docker.com/get-docker/) when using local services
 
 ## Usage
 
@@ -21,28 +22,18 @@ project:
 ```text
 Configure this repository for a new project. Rename the project from `monorepo`
 to the new project name, update package names, documentation, configuration
-files, and references across the repo. Preserve the existing Nix and Docker
-development setup unless a change is required for the new project.
+files, and references across the repo. Preserve the existing pnpm workspace
+and optional Docker services unless a change is required for the new project.
 ```
 
 ## Development
 
-This repo includes a Nix flake for the local development toolchain.
-Run `nix develop` before working in this repository to enter the required
-development shell.
+Follow the [development setup](./CONTRIBUTING.md#development-setup) to install
+the required tools, then run from the repository root:
 
 ```bash
-nix develop
+pnpm install --frozen-lockfile
+pnpm check
 ```
 
-Start coding agents from inside the Nix development shell so their commands use
-the same toolchain as local development.
-
-```bash
-nix develop
-opencode
-```
-
-Agents should run verification commands from inside the Nix shell. If an agent
-was not started from `nix develop`, run commands through `nix develop --command`
-instead.
+Coding agents use these same commands with Node.js and pnpm on `PATH`.
