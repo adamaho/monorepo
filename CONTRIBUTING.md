@@ -7,21 +7,21 @@ to carry forward into future projects created from the template.
 
 Install these before working in the repo:
 
-- [Nix](https://nixos.org/download/)
-- [Docker](https://docs.docker.com/get-docker/)
+- [Node.js](https://nodejs.org/en/download) 24, matching `engines.node` in `package.json`
+- [pnpm](https://pnpm.io/installation) at the version pinned in `packageManager`
+- [Docker with Compose](https://docs.docker.com/get-docker/) when using local services
 
 ## Development Setup
 
-Enter the Nix development shell before running project commands:
-
-```bash
-nix develop
-```
+Use the Node.js and pnpm versions declared in `package.json`. Existing tools
+in a local machine or sandbox are fine when they meet those requirements.
+Install pnpm directly using its [installation instructions](https://pnpm.io/installation);
+use the pinned version and do not use Corepack.
 
 Install dependencies:
 
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 ```
 
 Start local infrastructure when a package needs shared runtime services:
@@ -74,9 +74,6 @@ name `@monorepo/billing`.
 Prefer centralizing shared dependency versions in `pnpm-workspace.yaml` using
 the catalog. This keeps package manifests small and makes upgrades easier to
 review.
-
-The Nix shell provides pnpm 12 directly from the checksum-pinned binaries in
-`nix/pnpm.nix`. Keep its version aligned with `packageManager` in `package.json`.
 
 ## Changesets
 
@@ -141,17 +138,9 @@ fix(api): validate missing request body
 
 ## Coding Agents
 
-Start coding agents from inside the Nix shell so their commands use the same
-toolchain as local development:
+Start coding agents from the repository root with Node.js and pnpm on `PATH`.
+Use the same setup and verification commands as local development:
 
 ```bash
-nix develop
-opencode
-```
-
-If an agent was not started inside `nix develop`, run verification commands
-through Nix explicitly:
-
-```bash
-nix develop --command pnpm check
+pnpm check
 ```
