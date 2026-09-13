@@ -14,11 +14,20 @@ Shared TypeScript configurations for this Turborepo.
 
 ```json
 {
+  "imports": {
+    "#src/*": "./src/*"
+  },
   "devDependencies": {
     "@monorepo/tool-tsconfig": "workspace:*"
   }
 }
 ```
+
+Both `service` and `app-vite` resolve package-local aliases from `package.json`.
+Use imports such as `#src/billing/calculate-total.ts` with explicit TypeScript
+extensions. Add `#test/*` only when a `test` folder exists. See the
+[package import conventions](../../CONTRIBUTING.md#package-imports) for tests,
+workspace boundaries, and build output requirements.
 
 2. Extend the workspace `tsconfig.json`:
 

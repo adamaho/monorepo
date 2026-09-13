@@ -69,6 +69,48 @@ The directory name must match the package's `package.json` name, excluding the
 npm scope when present. For example, `packages/billing/package.json` uses the
 name `@monorepo/billing`.
 
+## Package Imports
+
+Use native Node.js `package.json` imports for package-local modules in every
+workspace package with source or test folders. Add only the mappings whose
+folders exist:
+
+```json
+{
+  "imports": {
+    "#src/*": "./src/*",
+    "#test/*": "./test/*"
+  }
+}
+```
+
+Keep explicit `.ts` extensions in TypeScript imports, including nested paths:
+
+```ts
+import { calculateTotal } from "#src/billing/calculate-total.ts";
+import { receiptFixture } from "#test/fixtures/receipt.ts";
+```
+
+Replace parent-directory imports such as `../` and `../../` with these aliases.
+Same-directory `./` imports may remain. The root lint config enforces this
+convention with `import/no-relative-parent-imports` using the pinned Nopeus
+version. Keep inter-package imports on workspace package names and their public
+`exports`; aliases are private to the package declaring them. Do not introduce
+TypeScript-only `paths` mappings or duplicate aliases in test/bundler config.
+
+Use the shared `service` (NodeNext) or `app-vite` (bundler) TypeScript preset,
+which enables `resolvePackageJsonImports`. Include `test/**/*.ts` and set
+`rootDir` to `.` when type-checking tests alongside source. Node.js 24 runs
+source `.ts` entry points directly; Vitest and Vite resolve the same imports
+from the package manifest.
+
+The mappings above target source files. For bundled builds, ensure the bundler
+resolves local aliases into the bundle. For unbundled JavaScript output, define
+an output-specific imports map in the deployed package manifest and verify it
+with Node.js. TypeScript's `rewriteRelativeImportExtensions` does not rewrite
+`#src/*.ts` specifiers; changing `outDir` alone does not make them target emitted
+JavaScript.
+
 ## Dependency Management
 
 Prefer centralizing shared dependency versions in `pnpm-workspace.yaml` using
