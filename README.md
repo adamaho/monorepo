@@ -24,8 +24,6 @@ Configure this repository for a new project. Rename the project from `monorepo`
 to the new project name, update package names, documentation, configuration
 files, and references across the repo. Preserve the existing pnpm workspace
 and optional Docker services unless a change is required for the new project.
-Use package-local package.json imports aliases (#src/* and #test/*) for folders
-that exist in each workspace package, following CONTRIBUTING.md.
 ```
 
 ## Development
