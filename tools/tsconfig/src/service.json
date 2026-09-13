@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": ["@adamaho/nopeus-tsconfig/effect", "@adamaho/nopeus-tsconfig/node"],
   "compilerOptions": {
+    "resolvePackageJsonImports": true,
     "rewriteRelativeImportExtensions": false,
     "incremental": true,
     "composite": true,

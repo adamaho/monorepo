@@ -6,4 +6,7 @@ import packageJson from "./package.json" with { type: "json" };
 
 export default defineConfig({
   extends: [base, effect({ packageName: packageJson.name })],
+  rules: {
+    "import/no-relative-parent-imports": "error",
+  },
 });
