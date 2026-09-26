@@ -108,14 +108,14 @@ settings:
 catalogs:
   default:
     '@adamaho/nopeus-oxlint-config':
-      specifier: 0.3.0
-      version: 0.3.0
+      specifier: 0.4.1
+      version: 0.4.1
     '@adamaho/nopeus-oxlint-plugin':
-      specifier: 0.6.0
-      version: 0.6.0
+      specifier: 0.7.1
+      version: 0.7.1
     '@adamaho/nopeus-tsconfig':
-      specifier: 0.2.0
-      version: 0.2.0
+      specifier: 0.3.1
+      version: 0.3.1
     '@changesets/cli':
       specifier: 3.0.2
       version: 3.0.2
@@ -156,10 +156,10 @@ importers:
     devDependencies:
       '@adamaho/nopeus-oxlint-config':
         specifier: 'catalog:'
-        version: 0.3.0(oxlint@1.81.0)
+        version: 0.4.1(oxlint@1.81.0)
       '@adamaho/nopeus-oxlint-plugin':
         specifier: 'catalog:'
-        version: 0.6.0(oxlint@1.81.0)
+        version: 0.7.1(oxlint@1.81.0)
       '@changesets/cli':
         specifier: 'catalog:'
         version: 3.0.2
@@ -203,7 +203,7 @@ importers:
     devDependencies:
       '@adamaho/nopeus-tsconfig':
         specifier: 'catalog:'
-        version: 0.2.0
+        version: 0.3.1
       '@effect/tsgo':
         specifier: 'catalog:'
         version: 0.41.0
@@ -216,20 +216,20 @@ importers:
 
 packages:
 
-  '@adamaho/nopeus-oxlint-config@0.3.0':
-    resolution: {integrity: sha512-ZYwgjMYq2sY9zvCtMxmqkm15z8v1UnwFhj48olekHLnzAtt8N5t/RphJ77oLdLN0/L/yE9m0iSrhT4JpGM6bOQ==, tarball: https://npm.pkg.github.com/download/@adamaho/nopeus-oxlint-config/0.3.0/8557ed20c53527a27b40d8def1db4769caf5fef2}
+  '@adamaho/nopeus-oxlint-config@0.4.1':
+    resolution: {integrity: sha512-Cex3sj97CKHp9T4NO8mzxDEkpz1P5wgAkVVywlgcukfKVEy8zvhTpjE/4WpC2LQeTlo151JlvWsflzDEd2S6EQ==}
     engines: {node: ^22.18.0 || >=24.0.0}
     peerDependencies:
       oxlint: '>=1.79.0 <2'
 
-  '@adamaho/nopeus-oxlint-plugin@0.6.0':
-    resolution: {integrity: sha512-LsHX3wi0ZHDDQuwk70vfMTkZsw54aa0LmSga47VYlXHpH8Px4S6fSolF8epJaW9g0C23GiMivPVNS+PIYHBZmg==, tarball: https://npm.pkg.github.com/download/@adamaho/nopeus-oxlint-plugin/0.6.0/c5f06a3088e4eee8479faf42adaa1aa349e6ab91}
+  '@adamaho/nopeus-oxlint-plugin@0.7.1':
+    resolution: {integrity: sha512-ghD+yGXY0DAlIndKyWHSvhYzgLzbWt9UrHMqFtvXAbmyUzu+0KTTLg5KcGdsVTHhv0sLDmKLLiJtNmPa4Y+F4Q==}
     engines: {node: ^22.18.0 || >=24.0.0}
     peerDependencies:
       oxlint: '>=1.79.0 <2'
 
-  '@adamaho/nopeus-tsconfig@0.2.0':
-    resolution: {integrity: sha512-HGLN8GcVBguKogCrXIYft3DEDjWEJ4U3kmFKDziv/Hzd05220dtK7msNwibw2XznhzzwKd4dBX0lZB76LcenJA==, tarball: https://npm.pkg.github.com/download/@adamaho/nopeus-tsconfig/0.2.0/21ef79da8bbbec584116aee49f64c2fcac097a0c}
+  '@adamaho/nopeus-tsconfig@0.3.1':
+    resolution: {integrity: sha512-mpCNIT+TUFcF9BIF5ln2Qk07vAGoZ/u4vrWLPTfbmE6yGcu6mFCO/3kMDgg8sXnf7n5SBh+h1v/QmisP9Y0SMQ==}
 
   '@changesets/apply-release-plan@8.1.0':
     resolution: {integrity: sha512-M93HOGyX3ssg6He3b5NotaHtQVu6uajHS6UIQ28xKt2RzskCy73ayX4I914qBKjTJmrE4YFlELQjfcqxbmGLJw==}
@@ -1477,17 +1477,17 @@ packages:
 
 snapshots:
 
-  '@adamaho/nopeus-oxlint-config@0.3.0(oxlint@1.81.0)':
+  '@adamaho/nopeus-oxlint-config@0.4.1(oxlint@1.81.0)':
     dependencies:
       oxlint: 1.81.0
 
-  '@adamaho/nopeus-oxlint-plugin@0.6.0(oxlint@1.81.0)':
+  '@adamaho/nopeus-oxlint-plugin@0.7.1(oxlint@1.81.0)':
     dependencies:
       '@oxlint/plugins': 1.81.0
       oxc-resolver: 11.24.2
       oxlint: 1.81.0
 
-  '@adamaho/nopeus-tsconfig@0.2.0': {}
+  '@adamaho/nopeus-tsconfig@0.3.1': {}
 
   '@changesets/apply-release-plan@8.1.0':
     dependencies:
