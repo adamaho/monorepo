@@ -111,6 +111,12 @@ with Node.js. TypeScript's `rewriteRelativeImportExtensions` does not rewrite
 `#src/*.ts` specifiers; changing `outDir` alone does not make them target emitted
 JavaScript.
 
+## Formatting
+
+The root `oxfmt.config.ts` imports `@adamaho/nopeus-oxfmt-config`. Keep shared
+formatting defaults in that package and add project-specific overrides in the
+root config. Workspace packages discover the root config automatically.
+
 ## Dependency Management
 
 Prefer centralizing shared dependency versions in `pnpm-workspace.yaml` using
