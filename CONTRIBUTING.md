@@ -39,14 +39,14 @@ completed change:
 pnpm check
 ```
 
-This runs the repository format check first, then lets Turbo run package-level
-lint and TypeScript tasks in parallel where packages define them.
+This runs the repository format check, then the root Oxlint configuration,
+then package-level TypeScript tasks through Turbo where packages define them.
 
 Useful focused commands:
 
 - `pnpm fmt` formats the repository
 - `pnpm fmt:check` checks formatting without writing changes
-- `pnpm lint` runs package lint tasks through Turbo
+- `pnpm lint` checks the repository with the root Oxlint configuration
 - `pnpm turbo run test:unit` runs package unit test tasks through Turbo
 - `pnpm tsc` runs package TypeScript tasks through Turbo
 
@@ -116,6 +116,21 @@ JavaScript.
 Prefer centralizing shared dependency versions in `pnpm-workspace.yaml` using
 the catalog. This keeps package manifests small and makes upgrades easier to
 review.
+
+The catalog uses Effect 4 and a matching `@effect/vitest` release with Vitest 5.
+Keep their peer requirements aligned when upgrading, and update `@effect/tsgo`
+alongside them. The shared TypeScript tooling runs `effect-tsgo patch` during
+installation.
+
+Keep the 24-hour minimum release age enabled. Newly published Nopeus packages
+are excluded; the selected Effect releases have version-specific exceptions so
+this upgrade can be installed immediately without exempting future releases.
+
+The root Oxlint configuration inherits the Nopeus Effect preset. Spacing around
+Schema declarations, service methods, and Layer construction is enforced by
+`nopeus/require-effect-construction-spacing`. When copying older configuration,
+replace `nopeus/require-schema-group-spacing` and
+`nopeus/require-service-method-spacing` overrides with this single rule.
 
 ## Changesets
 

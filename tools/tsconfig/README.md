@@ -8,6 +8,12 @@ Shared TypeScript configurations for this Turborepo.
 - `@monorepo/tool-tsconfig/service`: NodeNext defaults and Effect diagnostics for services.
 - `@monorepo/tool-tsconfig/app-vite`: bundler and React defaults for Vite workspaces.
 
+The presets extend `@adamaho/nopeus-tsconfig` from the workspace catalog.
+The Effect preset disables `unstableApiUsage` diagnostics so services can
+intentionally use Effect's unstable APIs. Installing dependencies patches the
+TypeScript compiler with the catalog's `@effect/tsgo` version via this package's
+`prepare` script.
+
 ## Usage in a workspace package
 
 1. Add this package to the workspace's `devDependencies`:
