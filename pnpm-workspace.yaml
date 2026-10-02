@@ -35,18 +35,4 @@ minimumReleaseAge: 1440
 minimumReleaseAgeStrict: true
 
 minimumReleaseAgeExclude:
-  - "@adamaho/nopeus-oxfmt-config"
-  - "@adamaho/nopeus-oxlint-config"
-  - "@adamaho/nopeus-oxlint-plugin"
-  - "@adamaho/nopeus-tsconfig"
-  # Explicitly selected Effect releases published within the 24-hour window.
-  - "effect@4.0.0"
-  - "@effect/vitest@4.0.0"
-  - "@effect/tsgo@0.47.2"
-  - "@effect/tsgo-darwin-arm64@0.47.2"
-  - "@effect/tsgo-darwin-x64@0.47.2"
-  - "@effect/tsgo-linux-arm@0.47.2"
-  - "@effect/tsgo-linux-arm64@0.47.2"
-  - "@effect/tsgo-linux-x64@0.47.2"
-  - "@effect/tsgo-win32-arm64@0.47.2"
-  - "@effect/tsgo-win32-x64@0.47.2"
+  - "@adamaho/*"
