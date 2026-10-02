@@ -128,9 +128,8 @@ Keep their peer requirements aligned when upgrading, and update `@effect/tsgo`
 alongside them. The shared TypeScript tooling runs `effect-tsgo patch` during
 installation.
 
-Keep the 24-hour minimum release age enabled. Newly published Nopeus packages
-are excluded; the selected Effect releases have version-specific exceptions so
-this upgrade can be installed immediately without exempting future releases.
+Keep the strict 24-hour minimum release age enabled, including for Effect
+packages. Newly published Nopeus packages are excluded.
 
 The root Oxlint configuration inherits the Nopeus Effect preset. Spacing around
 Schema declarations, service methods, and Layer construction is enforced by
