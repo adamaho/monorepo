@@ -129,7 +129,7 @@ alongside them. The shared TypeScript tooling runs `effect-tsgo patch` during
 installation.
 
 Keep the strict 24-hour minimum release age enabled, including for Effect
-packages. Newly published Nopeus packages are excluded.
+packages. All packages under the `@adamaho` scope are excluded.
 
 The root Oxlint configuration inherits the Nopeus Effect preset. Spacing around
 Schema declarations, service methods, and Layer construction is enforced by
