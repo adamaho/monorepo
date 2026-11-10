@@ -10,7 +10,7 @@ verification commands, workspace conventions, and commit guidelines.
 
 Before developing in this repository, install:
 
-- [Node.js](https://nodejs.org/en/download) 24, matching `engines.node` in `package.json`
+- [Node.js](https://nodejs.org/en/download) 26, matching `engines.node` in `package.json`
 - [pnpm](https://pnpm.io/installation) at the version pinned in `packageManager`
 - [Docker with Compose](https://docs.docker.com/get-docker/) when using local services
 
