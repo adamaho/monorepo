@@ -7,7 +7,7 @@ to carry forward into future projects created from the template.
 
 Install these before working in the repo:
 
-- [Node.js](https://nodejs.org/en/download) 24, matching `engines.node` in `package.json`
+- [Node.js](https://nodejs.org/en/download) 26, matching `engines.node` in `package.json`
 - [pnpm](https://pnpm.io/installation) at the version pinned in `packageManager`
 - [Docker with Compose](https://docs.docker.com/get-docker/) when using local services
 
@@ -100,7 +100,7 @@ TypeScript-only `paths` mappings or duplicate aliases in test/bundler config.
 
 Use the shared `service` (NodeNext) or `app-vite` (bundler) TypeScript preset,
 which enables `resolvePackageJsonImports`. Include `test/**/*.ts` and set
-`rootDir` to `.` when type-checking tests alongside source. Node.js 24 runs
+`rootDir` to `.` when type-checking tests alongside source. Node.js 26 runs
 source `.ts` entry points directly; Vitest and Vite resolve the same imports
 from the package manifest.
 
